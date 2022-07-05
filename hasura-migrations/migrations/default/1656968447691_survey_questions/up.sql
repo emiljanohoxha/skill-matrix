@@ -1,6 +1,4 @@
-
-
- CREATE TABLE IF NOT EXISTS "public"."surveys_questions_pkey" (
+ CREATE TABLE IF NOT EXISTS "public"."surveys_questions" (
    "survey_question_id" INT GENERATED ALWAYS AS IDENTITY, 
    "board_id" INT NOT NULL,
    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
