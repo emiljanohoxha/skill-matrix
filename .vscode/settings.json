@@ -6,5 +6,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.tsc.autoDetect": "off",
-  "npm.autoDetect": "off"
+  "npm.autoDetect": "off",
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  }
 }
