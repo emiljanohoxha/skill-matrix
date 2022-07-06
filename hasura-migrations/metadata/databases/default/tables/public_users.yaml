@@ -1,0 +1,25 @@
+table:
+  name: users
+  schema: public
+array_relationships:
+  - name: answers
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: answers
+          schema: public
+  - name: board_admins
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: board_admins
+          schema: public
+  - name: invites
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: invites
+          schema: public
