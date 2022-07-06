@@ -13,9 +13,9 @@
 
 ## Day 2
 
--- Changed permisions role for reading
--- Exported metadata
--- Created different mutations 
--- Tried to fetch data in frontend with graphql
--- Started working in frontend to display the start page component
+-- Changed permisions role for reading\
+-- Exported metadata\
+-- Created different mutations \
+-- Tried to fetch data in frontend with graphql\
+-- Started working in frontend to display the start page component\
 
