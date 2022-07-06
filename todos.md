@@ -4,7 +4,7 @@ Rest routes\
 
 Pages --	
 	- [ ] 0)Login \
-	- []	-invalid login invitation\
+	- [ ]	-invalid login invitation\
  	1)start page (also ending page)\
 	- [ ]	1.1)deadline for survey filling\
 	- [ ]	1.2 number of questions answered\
