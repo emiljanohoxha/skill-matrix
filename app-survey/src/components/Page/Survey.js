@@ -10,12 +10,26 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const Survey = ({ title, actions, withPadding, item, children, ...props}) => {
-//   item?.questions?.map(item => (console.log(item.data.text)));
+export const Survey = ({
+  title,
+  actions,
+  withPadding,
+  item,
+  children,
+  ...props
+}) => {
+  //   item?.questions?.map(item => (console.log(item.data.text)));
   const navigate = useNavigate();
+  const [itemData, setItemData] = useState(0);
 
-  const {itemData, setItemData} = useState(0);
+  const handleIncrement = () => {
+    console.log(itemData);
+    itemData < item.questions.length - 1
+      ? setItemData(itemData + 1)
+      : setItemData(itemData);
+  };
 
+  const handleDecrement = () => setItemData(itemData - 1);
 
   return (
     <Paper
@@ -41,10 +55,10 @@ export const Survey = ({ title, actions, withPadding, item, children, ...props})
               border: "2px solid red"
             }}
           >
-           {/* { console.log("last data",item.questions)} */}
+            {/* { console.log("last data",item.questions)} */}
 
-            {item.questions[0].data.text}
-         
+            {item.questions[itemData].data.text}
+
             {/* Sometimes, you meet someone, and you just click. You feel like
             you've been besties your entire life and honestly can't believe
             there was a time when you didn't even know they existed. */}
@@ -86,25 +100,29 @@ export const Survey = ({ title, actions, withPadding, item, children, ...props})
               variant="outlined"
             />
           </Box>
-            <Box>   
-            <ButtonGroup disableElevation variant="contained" sx={{
-              display: "flex",
-              justifyContent: "end",
-              mr: 5,
-              mt:2
-            }}>
+          <Box>
+            <ButtonGroup
+              disableElevation
+              variant="contained"
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                mr: 5,
+                mt: 2
+              }}
+            >
               <Button
-                // onClick={() => setItemData(itemData + 1)}
+                onClick={handleDecrement}
                 color="primary"
                 variant="contained"
                 startIcon={<ArrowBackIcon />}
                 actions={actions}
+                disabled={itemData === 0}
               >
                 Prev
               </Button>
               <Button
-                onClick={() => setItemData(itemData + 1)}
-
+                onClick={handleIncrement}
                 // onClick={changeStateQuestion}
                 color="primary"
                 variant="contained"
@@ -114,7 +132,7 @@ export const Survey = ({ title, actions, withPadding, item, children, ...props})
                 Next
               </Button>
             </ButtonGroup>
-            </Box>
+          </Box>
         </Box>
       </Container>
     </Paper>
