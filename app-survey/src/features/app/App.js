@@ -24,7 +24,7 @@ export const App = () => {
           ? `Computer says: ${data.questions[0].data.text}`
           : "loading time..."}
       </Page>}/>
-      <Route path="/survey" element={<Survey />} />
+      <Route path="/survey" element={<Survey item={data} />} />
     </Routes>
     </>
 
