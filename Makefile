@@ -1,7 +1,12 @@
 # HASURA SEED SOURCE
 # it is used in the
-from?=dummy
-
+from?=${name}
+table_1?=${board_admins}
+table_2?=${boards}
+table_3?=${questions}
+table_4?=${surveys_questions}
+table_5?=${surveys}
+table_6?=${users}
 # HASURA MIGRATION STEPS
 # it is used in the hasura postgres migration scripts to control
 # how many up/down migrations to apply
@@ -61,12 +66,20 @@ init:
 	@hasura migrate apply --project hasura-migrations --all-databases
 	@echo "Applying Hasura metadata..."
 	@hasura metadata apply --project hasura-migrations
-	@echo "Seeding the main database from: \"$(from).sql\"..."
-	@hasura seed apply --project hasura-migrations --database-name $(project) --file $(from).sql
+	(make seed)
 
 seed:
-	@echo "Seeding the main database from: \"$(from).sql\"..."
-	@hasura seed apply --project hasura-migrations --database-name $(project) --file $(from).sql
+	@echo "Seeding the main database from: \"users.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file users.sql
+	@echo "Seeding the main database from: \"boards.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file boards.sql
+	@echo "Seeding the main database from: \"board_admins.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file board_admins.sql
+	@echo "Seeding the main database from: \"questions.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file questions.sql
+	@echo "Seeding the main database from: \"surveys_questions.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file surveys_questions.sql
+	
 
 
 #
