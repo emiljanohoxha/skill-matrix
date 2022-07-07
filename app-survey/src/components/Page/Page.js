@@ -3,6 +3,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import StartIcon from "@mui/icons-material/Start";
+import { useNavigate } from "react-router-dom";
 
 export const PageTitle = ({ actions, children }) => (
   <Box
@@ -14,11 +15,7 @@ export const PageTitle = ({ actions, children }) => (
     }}
   >
     {children && (
-      <Box
-        sx={{
-          flex: 1
-        }}
-      >
+      <Box sx={{ flex: 1 }}>
         {typeof children === "string" ? (
           <Typography
             variant="h3"
@@ -46,54 +43,58 @@ export const Page = ({
   actions2,
   children,
   ...props
-}) => (
-  <Paper
-    {...props}
-    sx={{
-      marginTop: 15,
-      width: "75vw",
-      minHeight: "65%"
-    }}
-  >
-    {(title || actions) && <PageTitle actions={actions}>{title}</PageTitle>}
-    <Box
+}) => {
+  const navigate = useNavigate();
+  const navigateToSurvey = () => {
+    navigate("/survey");
+  };
+
+  return (
+    <Paper
+      {...props}
       sx={{
-        display: "flex",
-        justifyContent: "center"
+        marginTop: 15,
+        width: "75vw",
+        minHeight: "65%"
       }}
     >
+      {(title || actions) && <PageTitle actions={actions}>{title}</PageTitle>}
       <Box
         sx={{
-          p: withPadding ? 20 : 0,
-
-          backgroundColor: "#e6e8e6",
-
-          borderBottom: "2px solid black"
+          display: "flex",
+          justifyContent: "center"
         }}
       >
-        We're a startup company looking to learn more about how women buy
-        wedding dresses. Reflect back to the time if and when you were looking
-        for a wedding dress, and try to approach this survey through those eyes.
+        <Box
+          sx={{
+            p: withPadding ? 20 : 0,
+            backgroundColor: "#e6e8e6",
+            borderBottom: "2px solid black"
+          }}
+        >
+          We're a startup company looking to learn more about how women buy
+          wedding dresses. Reflect back to the time if and when you were looking
+          for a wedding dress, and try to approach this survey through those
+          eyes.
+        </Box>
       </Box>
-    </Box>
-
-    {/* {actions && <Box sx={{ ml: 4 }}>{actions}</Box>} */}
-
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        mt: 5
-      }}
-    >
-      <Button
-        color="primary"
-        variant="outlined"
-        endIcon={<StartIcon />}
-        actions={actions}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mt: 5
+        }}
       >
-        Start
-      </Button>
-    </Box>
-  </Paper>
-);
+        <Button
+          onClick={navigateToSurvey}
+          color="primary"
+          variant="outlined"
+          endIcon={<StartIcon />}
+          actions={actions}
+        >
+          Start
+        </Button>
+      </Box>
+    </Paper>
+  );
+};
