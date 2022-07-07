@@ -4,9 +4,11 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import StartIcon from "@mui/icons-material/Start";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useState } from "react";
+import Reating from "@mui/material/Rating";
 
 export const Survey = ({
   title,
@@ -18,8 +20,29 @@ export const Survey = ({
   ...props
 }) => {
   console.log("itemii 2", item2);
+  const labels = {
+    0.5: "Useless",
+    1: "Useless+",
+    1.5: "Poor",
+    2: "Poor+",
+    2.5: "Ok",
+    3: "Ok+",
+    3.5: "Good",
+    4: "Good+",
+    4.5: "Excellent",
+    5: "Excellent+"
+  };
+
+  function getLabelText(value) {
+    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+  }
+  const [value, setValue] = useState(2);
+  const [hover, setHover] = useState(-1);
 
   const [itemData, setItemData] = useState(0);
+  const [itemAnswer, setItemAnswer] = useState(0);
+
+  console.log("answer", item2?.questions_by_pk.board.answers[0]);
 
   const handleIncrement = () => {
     console.log(itemData);
@@ -28,6 +51,11 @@ export const Survey = ({
       : setItemData(itemData);
   };
 
+  const handleIncrementAnswer = () => {
+    itemAnswer < item2?.answer?.length - 1
+      ? setItemAnswer(itemAnswer + 1)
+      : setItemAnswer(itemAnswer);
+  };
   const handleDecrement = () => setItemData(itemData - 1);
 
   return (
@@ -36,7 +64,8 @@ export const Survey = ({
       sx={{
         marginTop: 15,
         width: "75vw",
-        minHeight: "65%"
+        minHeight: "65%",
+        backgroundColor: "#a8dadc"
       }}
     >
       <Container>
@@ -50,11 +79,12 @@ export const Survey = ({
               display: "flex",
               justifyContent: "center",
               p: 5,
-              border: "2px solid red"
+              fontSize: 22,
+              backgroundColor: "#457b9d",
+              color: "white"
             }}
           >
             {item?.questions[itemData].data.text}
-
           </Box>
         </Box>
 
@@ -64,17 +94,39 @@ export const Survey = ({
           sx={{
             display: "flex",
             justifyContent: "center",
-            mb: 2
+            mt: 10
           }}
         >
-          asdfljkdsflds
+          {/* {item2?.questions_by_pk?.board?.answers[itemAnswer].NOTES} */}
+          <Reating
+            sx={{
+              fontSize: 40
+            }}
+            name="hover-feedback"
+            value={value}
+            precision={0.5}
+            getLabelText={getLabelText}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            onChangeActive={(event, newHover) => {
+              setHover(newHover);
+            }}
+            emptyIcon={
+              <StartIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+          />
+          {value !== null && (
+            <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+          )}
         </Box>
 
         <Box
           component="div"
           sx={{
             display: "flex",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            mt: 10
           }}
         >
           <Box
@@ -114,9 +166,12 @@ export const Survey = ({
               >
                 Prev
               </Button>
+
               <Button
-                onClick={handleIncrement}
-                // onClick={changeStateQuestion}
+                onClick={() => {
+                  handleIncrement();
+                  handleIncrementAnswer();
+                }}
                 color="primary"
                 variant="contained"
                 endIcon={<NavigateNextIcon />}
