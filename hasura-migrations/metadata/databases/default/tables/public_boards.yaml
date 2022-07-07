@@ -38,3 +38,10 @@ array_relationships:
         table:
           name: surveys_questions
           schema: public
+select_permissions:
+  - role: form
+    permission:
+      columns:
+        - name
+        - board_id
+      filter: {}
