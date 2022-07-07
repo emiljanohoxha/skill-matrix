@@ -14,21 +14,19 @@ const PING_ACTION_QUERY = gql`
 `;
 
 const query = gql`
-  query MyQuery1 {
-    questions {
-      data
+  query getQuestionById {
+    questions_by_pk(question_id: 1) {
       type
       board {
-        answers(where: { question_id: { _eq: 1 } }) {
-          NOTES
+        answers(where: { question_id: { _eq: 1 }, user_id: { _eq: 1 } }) {
           SCORE
-          board_id
-          created_at
-          question_id
-          updated_at
-          user_id
+          NOTES
+          answer_id
         }
       }
+      question_id
+      data
+      created_at
     }
   }
 `;
