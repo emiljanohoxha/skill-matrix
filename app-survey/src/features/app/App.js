@@ -31,7 +31,7 @@ const query = gql`
   }
 `;
 
-const queryByAnsId = gql`
+const GetAnswersByAnswerId = gql`
   query GetAnswerById {
     answers_by_pk(answer_id: 2) {
       answer_id
@@ -40,6 +40,18 @@ const queryByAnsId = gql`
       data
       user_id
       question_id
+    }
+  }
+`;
+
+const GetAnswersByUserId = gql`
+  query GetUserAnswers {
+    answers(where: { user_id: { _eq: 1 } }) {
+      NOTES
+      SCORE
+      board_id
+      created_at
+      updated_at
     }
   }
 `;
