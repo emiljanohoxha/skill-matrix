@@ -31,6 +31,19 @@ const query = gql`
   }
 `;
 
+const queryByAnsId = gql`
+  query GetAnswerById {
+    answers_by_pk(answer_id: 2) {
+      answer_id
+      NOTES
+      SCORE
+      data
+      user_id
+      question_id
+    }
+  }
+`;
+
 export const App = () => {
   const { isSuccess, data } = useQuery("MyQuery", PING_ACTION_QUERY);
   const test1 = useQuery("MyQuery1", query);
