@@ -1,12 +1,7 @@
 # HASURA SEED SOURCE
 # it is used in the
 from?=${name}
-table_1?=${board_admins}
-table_2?=${boards}
-table_3?=${questions}
-table_4?=${surveys_questions}
-table_5?=${surveys}
-table_6?=${users}
+
 # HASURA MIGRATION STEPS
 # it is used in the hasura postgres migration scripts to control
 # how many up/down migrations to apply
@@ -79,6 +74,8 @@ seed:
 	@hasura seed apply --project hasura-migrations --database-name $(project) --file questions.sql
 	@echo "Seeding the main database from: \"surveys_questions.sql\"..."
 	@hasura seed apply --project hasura-migrations --database-name $(project) --file surveys_questions.sql
+	@echo "Seeding the main database from: \"answers.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file answers.sql
 	
 
 
