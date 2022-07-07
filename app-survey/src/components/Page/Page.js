@@ -50,8 +50,9 @@ export const Page = ({
   <Paper
     {...props}
     sx={{
+      marginTop: 15,
       width: "75vw",
-      minHeight: "100%"
+      minHeight: "65%"
     }}
   >
     {(title || actions) && <PageTitle actions={actions}>{title}</PageTitle>}
