@@ -8,14 +8,33 @@ import { Survey } from "../../components/Page/Survey";
 const PING_ACTION_QUERY = gql`
   query MyQuery {
     questions {
-      data
+      data,
+      type
     }
   }
 `;
 
+const query = gql`
+query MyQuery1 {
+    answers(where: {user_id: {_eq: 1}}) {
+      NOTES
+      SCORE
+      board_id
+      created_at
+      question_id
+      updated_at
+      user_id
+    }
+  }
+`;
+
+
 export const App = () => {
   const { isSuccess,  data } = useQuery("MyQuery", PING_ACTION_QUERY);
+  // const test1 = useQuery("MyQuery1", query);
   console.log(data);
+  // console.log("my data",test1.data);
+
   return (
     <>
     <Routes>
@@ -25,6 +44,7 @@ export const App = () => {
           : "loading time..."}
       </Page>}/>
       <Route path="/survey" element={<Survey item={data} />} />
+      
     </Routes>
     </>
 

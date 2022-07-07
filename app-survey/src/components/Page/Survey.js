@@ -1,13 +1,11 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-// import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export const Survey = ({
@@ -15,16 +13,17 @@ export const Survey = ({
   actions,
   withPadding,
   item,
+  item2,
   children,
   ...props
 }) => {
-  //   item?.questions?.map(item => (console.log(item.data.text)));
-  const navigate = useNavigate();
+  console.log("itemii 2", item2);
+
   const [itemData, setItemData] = useState(0);
 
   const handleIncrement = () => {
     console.log(itemData);
-    itemData < item.questions.length - 1
+    itemData < item?.questions?.length - 1
       ? setItemData(itemData + 1)
       : setItemData(itemData);
   };
@@ -41,7 +40,6 @@ export const Survey = ({
       }}
     >
       <Container>
-        {/* {(title || actions) && <PageTitle actions={actions}>{title}</PageTitle>} */}
         <Box
           sx={{
             p: 5
@@ -55,13 +53,8 @@ export const Survey = ({
               border: "2px solid red"
             }}
           >
-            {/* { console.log("last data",item.questions)} */}
+            {item?.questions[itemData].data.text}
 
-            {item.questions[itemData].data.text}
-
-            {/* Sometimes, you meet someone, and you just click. You feel like
-            you've been besties your entire life and honestly can't believe
-            there was a time when you didn't even know they existed. */}
           </Box>
         </Box>
 
