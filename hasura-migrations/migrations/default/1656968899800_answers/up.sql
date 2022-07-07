@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS "public"."answers"(
     "SCORE" INT,
     "NOTES" varchar,
     "data" JSON NOT NULL DEFAULT '{}',
-    CONSTRAINT "answers_pkey" PRIMARY KEY ("answer_id"),
+    CONSTRAINT "answers_pkey" PRIMARY KEY ("user_id", "question_id"),
     FOREIGN KEY(board_id) REFERENCES boards(board_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id) -- FOREIGN KEY(question_id) REFERENCES questions(question_id)
+    FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
