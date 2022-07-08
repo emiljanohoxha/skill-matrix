@@ -16,10 +16,11 @@ export const Survey = ({
   withPadding,
   item,
   item2,
+  singleAnswer,
   children,
   ...props
 }) => {
-  // console.log("itemii 2", item2);
+  console.log("itemii 2", singleAnswer);
   const labels = {
     0: "Null",
     10: "Useless",
@@ -41,12 +42,13 @@ export const Survey = ({
   const [value,setValue] = useState("")
 
   useEffect( ()=> {
-    setValue(  item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE/20 == null
+    setValue(  singleAnswer?.answers_by_pk?.SCORE/20 == null
       ? 0
-      : item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE/20)
+      : singleAnswer?.answers_by_pk?.SCORE/20 )
   },[item2])
 
-  
+  console.log("value",value);
+
   useEffect(() => {
     setValueNotes(
       typeof item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES === "string"
@@ -60,10 +62,10 @@ export const Survey = ({
   }
 
   const handleIncrement = () => {
-    console.log(itemData);
     itemData < item?.questions?.length - 1
-      ? setItemData(itemData + 1)
-      : setItemData(itemData);
+    ? setItemData(itemData + 1)
+    : setItemData(itemData);
+    // console.log(itemData);
   };
 
   const handleIncrementAnswer = () => {

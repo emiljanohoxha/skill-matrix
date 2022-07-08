@@ -35,17 +35,20 @@ const GetAllQuestionsPlusAnswers = gql`
   }
 `;
 
-const GetAnswersByAnswerId = gql`
-  query GetAnswerById {
-    answers_by_pk(answer_id: 2) {
-      answer_id
-      NOTES
-      SCORE
-      data
-      user_id
-      question_id
-    }
+const GetAnswerByAnswerId = gql`
+query GetAnswerById($user_id: Int!, $question_id: Int!) {
+  answers_by_pk(user_id: $user_id, question_id: $question_id) {
+    NOTES
+    SCORE
+    answer_id
+    board_id
+    created_at
+    data
+    question_id
+    updated_at
   }
+}
+
 `;
 
 const GetAnswersByUserId = gql`
@@ -61,9 +64,12 @@ const GetAnswersByUserId = gql`
 `;
 
 export const App = () => {
+  const questionID = 1;
+  const userID = 1;
   const { isSuccess, data } = useQuery("MyQuery", PING_ACTION_QUERY);
   const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
-  // console.log("my data", test1.data);
+  const test2 = useQuery("GetAnswerById", GetAnswerByAnswerId,  {variables:{question_id:questionID,user_id:userID}});
+  console.log("my data", test2);
   return (
     <>
       <Routes>
@@ -77,7 +83,7 @@ export const App = () => {
             </Page>
           }
         />
-        <Route path="/survey" element={<Survey item={data} item2={test1.data}/>} />
+        <Route path="/survey" element={<Survey item={data} item2={test1.data} singleAnswer={test2.data}/>} />
       </Routes>
     </>
   );
