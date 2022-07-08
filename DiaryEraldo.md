@@ -13,4 +13,4 @@ Day 4 went quite productive because we implemented some essential things for sur
 The day started by working on some proper queries to get certain data for frontend part.
 It was a little bit challenging because the data we get from query should be the proper way
 to get easily on UI component.
-I implemented the logic for answers, which is a simple rating form. This took some time to finshed it. The brainstoring today took us on refactoring the code.(structure the component by hierarchy)
+I implemented the logic for answers, which is a simple rating form. This took some time to finshed it. The brainstorming today took us on refactoring the code.(structure the component by hierarchy)
