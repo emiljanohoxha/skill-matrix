@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import StartIcon from "@mui/icons-material/Start";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Reating from "@mui/material/Rating";
 
 export const Survey = ({
@@ -37,12 +37,23 @@ export const Survey = ({
   const [itemData, setItemData] = useState(indexRecord);
   const [itemAnswer, setItemAnswer] = useState(indexRecord);
   const [hover, setHover] = useState(-1);
+  const [valueNotes, setValueNotes] = useState("");
 
   const [value, setValue] = useState(
     item2?.answers[indexRecord].SCORE == null
       ? 0
       : item2.answers[indexRecord].SCORE
   );
+
+  console.log("para ternyert", typeof item2?.answers[0]?.NOTES);
+
+  useEffect(() => {
+    setValueNotes(
+      typeof item2?.answers[indexRecord]?.NOTES === "string"
+        ? item2?.answers[indexRecord]?.NOTES
+        : ""
+    );
+  }, [item2]);
 
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
@@ -146,6 +157,7 @@ export const Survey = ({
             <TextField
               id="outlined-basic"
               label="Notes"
+              value={valueNotes}
               multiline
               maxRows={4}
               variant="outlined"
