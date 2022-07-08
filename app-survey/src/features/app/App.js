@@ -59,7 +59,6 @@ const GetAnswersByUserId = gql`
 export const App = () => {
   const { isSuccess, data } = useQuery("MyQuery", PING_ACTION_QUERY);
   const test1 = useQuery("MyQuery1", query);
-  // console.log(data);
   console.log("my data", test1.data);
   return (
     <>
