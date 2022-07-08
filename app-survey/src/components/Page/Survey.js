@@ -19,28 +19,34 @@ export const Survey = ({
   children,
   ...props
 }) => {
-  console.log("itemii 2", item2);
+  // console.log("itemii 2", item2);
   const labels = {
-    0.5: "Useless",
-    1: "Useless+",
-    1.5: "Poor",
-    2: "Poor+",
-    2.5: "Ok",
-    3: "Ok+",
-    3.5: "Good",
-    4: "Good+",
-    4.5: "Excellent",
-    5: "Excellent+"
+    0: "Null",
+    10: "Useless",
+    20: "Useless+",
+    30: "Poor",
+    40: "Poor+",
+    50: "Ok",
+    60: "Ok+",
+    70: "Good",
+    80: "Good+",
+    90: "Excellent",
+    100: "Excellent+"
   };
+  const indexRecord = 0;
+  const [itemData, setItemData] = useState(indexRecord);
+  const [itemAnswer, setItemAnswer] = useState(indexRecord);
+  const [hover, setHover] = useState(-1);
+
+  const [value, setValue] = useState(
+    item2?.answers[indexRecord].SCORE == null
+      ? 0
+      : item2.answers[indexRecord].SCORE
+  );
 
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
-  const [value, setValue] = useState(2);
-  const [hover, setHover] = useState(-1);
-
-  const [itemData, setItemData] = useState(0);
-  const [itemAnswer, setItemAnswer] = useState(0);
 
   console.log("answer", item2?.questions_by_pk.board.answers[0]);
 
@@ -97,7 +103,7 @@ export const Survey = ({
             mt: 10
           }}
         >
-          {/* {item2?.questions_by_pk?.board?.answers[itemAnswer].NOTES} */}
+          {item2?.answers[indexRecord].SCORE}
           <Reating
             sx={{
               fontSize: 40
