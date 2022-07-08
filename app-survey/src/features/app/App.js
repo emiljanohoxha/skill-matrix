@@ -51,17 +51,17 @@ query GetAnswerById($user_id: Int!, $question_id: Int!) {
 
 `;
 
-const GetAnswersByUserId = gql`
-  query GetUserAnswers {
-    answers(where: { user_id: { _eq: 1 } }) {
-      NOTES
-      SCORE
-      board_id
-      created_at
-      updated_at
-    }
-  }
-`;
+// const GetAnswersByUserId = gql`
+//   query GetUserAnswers {
+//     answers(where: { user_id: { _eq: 1 } }) {
+//       NOTES
+//       SCORE
+//       board_id
+//       created_at
+//       updated_at
+//     }
+//   }
+// `;
 
 export const App = () => {
   const questionID = 1;
@@ -83,7 +83,7 @@ export const App = () => {
             </Page>
           }
         />
-        <Route path="/survey" element={<Survey item={data} item2={test1.data} singleAnswer={test2.data}/>} />
+        <Route path="/survey" element={<Survey item={data} item2={test1.data} singleAnswer={test2.data} />} />
       </Routes>
     </>
   );
