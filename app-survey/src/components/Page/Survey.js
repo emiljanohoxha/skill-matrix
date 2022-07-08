@@ -38,28 +38,26 @@ export const Survey = ({
   const [itemAnswer, setItemAnswer] = useState(indexRecord);
   const [hover, setHover] = useState(-1);
   const [valueNotes, setValueNotes] = useState("");
+  const [value,setValue] = useState("")
 
-  const [value, setValue] = useState(
-    item2?.answers[indexRecord].SCORE == null
+  useEffect( ()=> {
+    setValue(  item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE/20 == null
       ? 0
-      : item2.answers[indexRecord].SCORE
-  );
+      : item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE/20)
+  },[item2])
 
-  console.log("para ternyert", typeof item2?.answers[0]?.NOTES);
-
+  
   useEffect(() => {
     setValueNotes(
-      typeof item2?.answers[indexRecord]?.NOTES === "string"
-        ? item2?.answers[indexRecord]?.NOTES
+      typeof item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES === "string"
+        ? item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES
         : ""
     );
   }, [item2]);
-
+  
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
-
-  console.log("answer", item2?.questions_by_pk.board.answers[0]);
 
   const handleIncrement = () => {
     console.log(itemData);
@@ -114,7 +112,7 @@ export const Survey = ({
             mt: 10
           }}
         >
-          {item2?.answers[indexRecord].SCORE}
+          {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE}
           <Reating
             sx={{
               fontSize: 40
@@ -136,6 +134,7 @@ export const Survey = ({
           {value !== null && (
             <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
           )}
+          {console.log(value)}
         </Box>
 
         <Box
@@ -162,6 +161,7 @@ export const Survey = ({
               maxRows={4}
               variant="outlined"
             />
+            {console.log(typeof(valueNotes))}
           </Box>
           <Box>
             <ButtonGroup

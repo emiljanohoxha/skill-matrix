@@ -13,20 +13,24 @@ const PING_ACTION_QUERY = gql`
   }
 `;
 
-const query = gql`
-  query getQuestionById {
-    questions_by_pk(question_id: 1) {
+const GetAllQuestionsPlusAnswers = gql`
+  query MyQuery {
+    questions {
+      board_id
+      created_at
       type
+      question_id
+      is_deleted
+      data
       board {
         answers(where: { question_id: { _eq: 1 }, user_id: { _eq: 1 } }) {
-          SCORE
           NOTES
-          answer_id
+          SCORE
+          board_id
+          created_at
+          updated_at
         }
       }
-      question_id
-      data
-      created_at
     }
   }
 `;
@@ -58,8 +62,8 @@ const GetAnswersByUserId = gql`
 
 export const App = () => {
   const { isSuccess, data } = useQuery("MyQuery", PING_ACTION_QUERY);
-  const test1 = useQuery("MyQuery1", query);
-  console.log("my data", test1.data);
+  const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
+  // console.log("my data", test1.data);
   return (
     <>
       <Routes>
@@ -73,7 +77,7 @@ export const App = () => {
             </Page>
           }
         />
-        <Route path="/survey" element={<Survey item={data} />} />
+        <Route path="/survey" element={<Survey item={data} item2={test1.data}/>} />
       </Routes>
     </>
   );
