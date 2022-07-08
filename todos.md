@@ -20,8 +20,8 @@
 - [ ] Loading indicator  
 - [ ] Placeholder question form  
 - [ ] Redirect user to end if no answers are available  
-- [ ] previous/next buttons component  
-- [ ] Answer component  
+- [x] previous/next buttons component  
+- [x] Answer component  
 - [ ] Automatically save answer when pressing next/previous button  
 - [ ] Congratulation component on completing answer  
 ## 4. Username  
