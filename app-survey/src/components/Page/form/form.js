@@ -7,7 +7,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useState } from "react";
-import { FormComps } from "./formComps/formComps";
+import { FormComps } from "./formComps";
 
 export const Form = ({
   handleDecrement,
