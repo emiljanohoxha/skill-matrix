@@ -13,6 +13,26 @@ export const Survey = ({
   children,
   ...props
 }) => {
+
+  const labels = {
+    0: "Null",
+    10: "Useless",
+    20: "Useless+",
+    30: "Poor",
+    40: "Poor+",
+    50: "Ok",
+    60: "Ok+",
+    70: "Good",
+    80: "Good+",
+    90: "Excellent",
+    100: "Excellent+"
+  };
+  const [hover, setHover] = useState(-1);
+
+  function getLabelText(value) {
+    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+  }
+
   console.log("itemii 2", singleAnswer);
 
   const indexRecord = 0;
@@ -64,6 +84,9 @@ export const Survey = ({
      valueNotes={valueNotes}
      itemData={itemData}
      indexRecord={indexRecord}
+     labels={labels}
+     getLabelText={getLabelText}
+     setHover={setHover}
      />
    </div>
   );

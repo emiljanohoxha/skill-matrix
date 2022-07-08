@@ -7,7 +7,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useState } from "react";
-import { FormComps } from "./formComps";
+import { FormComps } from "./formComps/formComps";
+
 
 export const Form = ({
   handleDecrement,
@@ -23,27 +24,13 @@ export const Form = ({
   item2,
   singleAnswer,
   setValue,
+  setHover,
+  hover,
+  labels,
+  getLabelText,
   children,
   ...props
 }) => {
-  const labels = {
-    0: "Null",
-    10: "Useless",
-    20: "Useless+",
-    30: "Poor",
-    40: "Poor+",
-    50: "Ok",
-    60: "Ok+",
-    70: "Good",
-    80: "Good+",
-    90: "Excellent",
-    100: "Excellent+"
-  };
-  const [hover, setHover] = useState(-1);
-
-  function getLabelText(value) {
-    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-  }
 
   return (
     <Paper
