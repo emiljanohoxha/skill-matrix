@@ -11,6 +11,8 @@ import { FormComps } from "./formComps/formComps";
 
 
 export const Form = ({
+  increment,
+  decrement,
   handleDecrement,
   handleIncrement,
   title,
@@ -43,6 +45,13 @@ export const Form = ({
       }}
     >
       <Container>
+        <Box>
+        <button onClick={
+                    increment
+            }>INCREMENT</button>
+            <button onClick={decrement}>DECREMENT</button>
+            {/* <button onClick={reset}>RESET</button> */}
+        </Box>
         <FormComps
           item={item}
           labels={labels}

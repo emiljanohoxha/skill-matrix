@@ -3,6 +3,8 @@ import Page from "../../components/Page";
 import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
+import { useEffect, useRef, useState } from "react";
+import { Sand } from "../../components/Page/sand";
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
@@ -63,17 +65,58 @@ query GetAnswerById($user_id: Int!, $question_id: Int!) {
 //   }
 // `;
 
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+
+  return ref.current;
+}
+
 export const App = () => {
-  const questionID = 1;
-  const userID = 1;
-  const { isSuccess, data } = useQuery("MyQuery", PING_ACTION_QUERY);
+
+  const [question_id, setQuestion_id] = useState(0);
+  const previousLimit = usePrevious(question_id);
+
+  const { error, data, loading, refetch } = useQuery("GetAnswerById", GetAnswerByAnswerId, {
+    // refetchOnWindowFocus: false,
+    enabled: false,
+    variables: {
+      user_id: 1,
+      question_id
+    }
+  });
+
+  const increment = () => {
+    setQuestion_id(question_id + 1)
+    refetch();
+  }
+  const decrement = () => {
+    setQuestion_id(question_id - 1);
+    refetch();
+
+  };
+  const reset = () => {
+    setQuestion_id(1);
+  };
+
+  console.log("state of question_id :", question_id);
+  console.log("graphql question_id :", data);
+
+  const showDataWhileLoading = previousLimit < question_id;
+  let updatedData = !loading || showDataWhileLoading ? data : undefined;
+
+
+  const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
   const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
-  const test2 = useQuery("GetAnswerById", GetAnswerByAnswerId,  {variables:{question_id:questionID,user_id:userID}});
-  console.log("my data", test2);
+
+
   return (
     <>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <Page withPadding title={"Survey App"} actions={<Logout />}>
@@ -82,8 +125,15 @@ export const App = () => {
                 : "loading time..."}
             </Page>
           }
-        />
-        <Route path="/survey" element={<Survey item={data} item2={test1.data} singleAnswer={test2.data} />} />
+        /> */}
+        <Route path="/sand" element={<Sand />} />
+        <Route path="/survey"  element={<Survey 
+        increment={increment}
+        decrement={decrement}
+        item={test2.data} 
+        item2={test1.data} 
+    
+        />} />
       </Routes>
     </>
   );
