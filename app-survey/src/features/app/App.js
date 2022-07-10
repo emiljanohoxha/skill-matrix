@@ -4,7 +4,7 @@ import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useEffect, useRef, useState } from "react";
-import { Sand } from "../../components/Page/sand";
+// import { Sand } from "../../components/Page/sand";
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
@@ -38,19 +38,18 @@ const GetAllQuestionsPlusAnswers = gql`
 `;
 
 const GetAnswerByAnswerId = gql`
-query GetAnswerById($user_id: Int!, $question_id: Int!) {
-  answers_by_pk(user_id: $user_id, question_id: $question_id) {
-    NOTES
-    SCORE
-    answer_id
-    board_id
-    created_at
-    data
-    question_id
-    updated_at
+  query GetAnswerById($user_id: Int!, $question_id: Int!) {
+    answers_by_pk(user_id: $user_id, question_id: $question_id) {
+      NOTES
+      SCORE
+      answer_id
+      board_id
+      created_at
+      data
+      question_id
+      updated_at
+    }
   }
-}
-
 `;
 
 // const GetAnswersByUserId = gql`
@@ -65,7 +64,6 @@ query GetAnswerById($user_id: Int!, $question_id: Int!) {
 //   }
 // `;
 
-
 function usePrevious(value) {
   const ref = useRef();
   useEffect(() => {
@@ -76,27 +74,29 @@ function usePrevious(value) {
 }
 
 export const App = () => {
-
   const [question_id, setQuestion_id] = useState(0);
   const previousLimit = usePrevious(question_id);
 
-  const { error, data, loading, refetch } = useQuery("GetAnswerById", GetAnswerByAnswerId, {
-    // refetchOnWindowFocus: false,
-    enabled: false,
-    variables: {
-      user_id: 1,
-      question_id
+  const { error, data, loading, refetch } = useQuery(
+    "GetAnswerById",
+    GetAnswerByAnswerId,
+    {
+      // refetchOnWindowFocus: false,
+      enabled: false,
+      variables: {
+        user_id: 1,
+        question_id
+      }
     }
-  });
+  );
 
   const increment = () => {
-    setQuestion_id(question_id + 1)
+    setQuestion_id(question_id + 1);
     refetch();
-  }
+  };
   const decrement = () => {
     setQuestion_id(question_id - 1);
     refetch();
-
   };
   const reset = () => {
     setQuestion_id(1);
@@ -108,10 +108,8 @@ export const App = () => {
   const showDataWhileLoading = previousLimit < question_id;
   let updatedData = !loading || showDataWhileLoading ? data : undefined;
 
-
   const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
   const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
-
 
   return (
     <>
@@ -126,14 +124,18 @@ export const App = () => {
             </Page>
           }
         /> */}
-        <Route path="/sand" element={<Sand />} />
-        <Route path="/survey"  element={<Survey 
-        increment={increment}
-        decrement={decrement}
-        item={test2.data} 
-        item2={test1.data} 
-    
-        />} />
+        {/* <Route path="/sand" element={<Sand />} /> */}
+        <Route
+          path="/survey"
+          element={
+            <Survey
+              increment={increment}
+              decrement={decrement}
+              item={test2.data}
+              item2={test1.data}
+            />
+          }
+        />
       </Routes>
     </>
   );

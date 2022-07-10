@@ -9,7 +9,6 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useState } from "react";
 import { FormComps } from "./formComps/formComps";
 
-
 export const Form = ({
   increment,
   decrement,
@@ -33,7 +32,6 @@ export const Form = ({
   children,
   ...props
 }) => {
-
   return (
     <Paper
       {...props}
@@ -45,13 +43,6 @@ export const Form = ({
       }}
     >
       <Container>
-        <Box>
-        <button onClick={
-                    increment
-            }>INCREMENT</button>
-            <button onClick={decrement}>DECREMENT</button>
-            {/* <button onClick={reset}>RESET</button> */}
-        </Box>
         <FormComps
           item={item}
           labels={labels}
@@ -101,7 +92,10 @@ export const Form = ({
               }}
             >
               <Button
-                onClick={handleDecrement}
+                onClick={() => {
+                  handleDecrement();
+                  decrement();
+                }}
                 color="primary"
                 variant="contained"
                 startIcon={<ArrowBackIcon />}
@@ -114,6 +108,7 @@ export const Form = ({
               <Button
                 onClick={() => {
                   handleIncrement();
+                  increment();
                 }}
                 color="primary"
                 variant="contained"

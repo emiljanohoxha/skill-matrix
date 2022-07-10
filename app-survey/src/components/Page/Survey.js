@@ -1,19 +1,19 @@
-
 import { useState, useEffect } from "react";
 import { Form } from "./form/form";
 
-
 export const Survey = ({
+  singleData,
   title,
   actions,
   withPadding,
   item,
-  item2,
+  // item2,
   singleAnswer,
+  increment,
+  decrement,
   children,
   ...props
 }) => {
-
   const labels = {
     0: "Null",
     10: "Useless",
@@ -33,61 +33,62 @@ export const Survey = ({
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
 
-  console.log("itemii 2", singleAnswer);
-
   const indexRecord = 0;
   const [itemData, setItemData] = useState(indexRecord);
-
   const [valueNotes, setValueNotes] = useState("");
-  const [value,setValue] = useState("")
+  const [value, setValue] = useState("");
 
+  console.log(singleData);
+  console.log("itemii 2", singleData?.answers_by_pk?.SCORE);
 
-
-  console.log("value",value);
+  // console.log("value",value);
+  // console.log(item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES)
 
   useEffect(() => {
     setValueNotes(
-      typeof item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES === "string"
-        ? item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES
+      typeof singleData?.answers_by_pk?.NOTES === "string"
+        ? singleData?.answers_by_pk?.NOTES
         : ""
     );
-  }, [item2]);
-  
-  useEffect( ()=> {
-    setValue(
-      singleAnswer?.answers_by_pk?.SCORE/20 == null
-      ? 0
-      : singleAnswer?.answers_by_pk?.SCORE/20 );
-  }, [item2])
+  }, [singleData]);
 
+  useEffect(() => {
+    setValue(
+      typeof singleData?.answers_by_pk?.SCORE / 20 == "null"
+        ? 0
+        : singleData?.answers_by_pk?.SCORE / 20
+    );
+  }, [singleData]);
 
   const handleIncrement = () => {
     itemData < item?.questions?.length - 1
-    ? setItemData(itemData + 1)
-    : setItemData(itemData);
+      ? setItemData(itemData + 1)
+      : setItemData(itemData);
     // console.log(itemData);
   };
 
   const handleDecrement = () => setItemData(itemData - 1);
 
   return (
-   <div>
-    <Form handleIncrement={handleIncrement}
-     handleDecrement={handleDecrement} 
-     item2={item2} 
-     title={title} 
-     actions={actions} 
-     withPadding={withPadding} 
-     item={item}
-     setValue={setValue}
-     value={value}
-     valueNotes={valueNotes}
-     itemData={itemData}
-     indexRecord={indexRecord}
-     labels={labels}
-     getLabelText={getLabelText}
-     setHover={setHover}
-     />
-   </div>
+    <div>
+      <Form
+        handleIncrement={handleIncrement}
+        handleDecrement={handleDecrement}
+        title={title}
+        actions={actions}
+        withPadding={withPadding}
+        item={item}
+        setValue={setValue}
+        value={value}
+        valueNotes={valueNotes}
+        itemData={itemData}
+        indexRecord={indexRecord}
+        labels={labels}
+        getLabelText={getLabelText}
+        setHover={setHover}
+        increment={increment}
+        decrement={decrement}
+      />
+    </div>
   );
 };
