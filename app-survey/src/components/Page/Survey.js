@@ -7,10 +7,11 @@ export const Survey = ({
   actions,
   withPadding,
   item,
+  itemData,
+  handleQuestionDecrement,
+  handleQuestionIncrement,
   // item2,
   singleAnswer,
-  increment,
-  decrement,
   children,
   ...props
 }) => {
@@ -33,8 +34,6 @@ export const Survey = ({
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
 
-  const indexRecord = 0;
-  const [itemData, setItemData] = useState(indexRecord);
   const [valueNotes, setValueNotes] = useState("");
   const [value, setValue] = useState("");
 
@@ -60,20 +59,9 @@ export const Survey = ({
     );
   }, [singleData]);
 
-  const handleIncrement = () => {
-    itemData < item?.questions?.length - 1
-      ? setItemData(itemData + 1)
-      : setItemData(itemData);
-    // console.log(itemData);
-  };
-
-  const handleDecrement = () => setItemData(itemData - 1);
-
   return (
     <div>
       <Form
-        handleIncrement={handleIncrement}
-        handleDecrement={handleDecrement}
         title={title}
         actions={actions}
         withPadding={withPadding}
@@ -82,12 +70,12 @@ export const Survey = ({
         value={value}
         valueNotes={valueNotes}
         itemData={itemData}
-        indexRecord={indexRecord}
+        //  indexRecord={indexRecord}
         labels={labels}
+        handleQuestionIncrement={handleQuestionIncrement}
+        handleQuestionDecrement={handleQuestionDecrement}
         getLabelText={getLabelText}
         setHover={setHover}
-        increment={increment}
-        decrement={decrement}
       />
     </div>
   );
