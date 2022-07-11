@@ -3,12 +3,12 @@ import Page from "../../components/Page";
 import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
-import { useEffect, useRef, useState } from "react";
-// import { Sand } from "../../components/Page/sand";
+import { useState } from "react";
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
     questions {
+      question_id
       data
       type
     }
@@ -52,87 +52,74 @@ const GetAnswerByAnswerId = gql`
   }
 `;
 
-// const GetAnswersByUserId = gql`
-//   query GetUserAnswers {
-//     answers(where: { user_id: { _eq: 1 } }) {
-//       NOTES
-//       SCORE
-//       board_id
-//       created_at
-//       updated_at
-//     }
-//   }
-// `;
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-
-  return ref.current;
-}
-
 export const App = () => {
-  const [question_id, setQuestion_id] = useState(0);
-  const previousLimit = usePrevious(question_id);
+  const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
+
+  const [question_index, setQuestionIndex] = useState(0);
+  const [itemData, setItemData] = useState(0);
 
   const { error, data, loading, refetch } = useQuery(
     "GetAnswerById",
     GetAnswerByAnswerId,
     {
-      // refetchOnWindowFocus: false,
       enabled: false,
       variables: {
         user_id: 1,
-        question_id
+        question_id: test2?.data?.questions[question_index]?.question_id
       }
     }
   );
 
-  const increment = () => {
-    setQuestion_id(question_id + 1);
-    refetch();
-  };
-  const decrement = () => {
-    setQuestion_id(question_id - 1);
-    refetch();
-  };
-  const reset = () => {
-    setQuestion_id(1);
+  // console.log("Test 2", test2.data)
+
+  const handleQuestionIncrement = () => {
+    if (itemData < test2?.data?.questions?.length - 1) {
+      setItemData(itemData + 1);
+      setQuestionIndex((question_index) => question_index + 1);
+      refetch();
+    } else {
+      setQuestionIndex((question_index) => question_index);
+      refetch();
+    }
   };
 
-  console.log("state of question_id :", question_id);
-  console.log("graphql question_id :", data);
+  const handleQuestionDecrement = () => {
+    if (itemData > 0) {
+      setItemData((itemData) => itemData - 1);
+      setQuestionIndex((question_index) => question_index - 1);
+      refetch();
+    } else {
+      setItemData(itemData);
+      setQuestionIndex(question_index);
+      refetch();
+    }
+  };
 
-  const showDataWhileLoading = previousLimit < question_id;
-  let updatedData = !loading || showDataWhileLoading ? data : undefined;
-
-  const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
-  const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
+  // const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
 
   return (
     <>
       <Routes>
-        {/* <Route
+        <Route
           path="/"
           element={
             <Page withPadding title={"Survey App"} actions={<Logout />}>
-              {isSuccess
+              {/* {isSuccess
                 ? `Computer says: ${data.questions[0].data.text}`
-                : "loading time..."}
+                : "loading time..."} */}
             </Page>
           }
-        /> */}
-        {/* <Route path="/sand" element={<Sand />} /> */}
+        />
         <Route
           path="/survey"
           element={
             <Survey
-              increment={increment}
-              decrement={decrement}
+              handleQuestionIncrement={handleQuestionIncrement}
+              handleQuestionDecrement={handleQuestionDecrement}
+              itemData={itemData}
               item={test2.data}
-              item2={test1.data}
+              // item2={test1.data}
+              singleData={data}
             />
           }
         />
