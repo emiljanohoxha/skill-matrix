@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS "public"."answers"(
     "SCORE" INT DEFAULT 0,
     "NOTES" varchar DEFAULT '',
     "data" JSON NOT NULL DEFAULT '{}',
+    "is_submited" BOOL DEFAULT FALSE,
     CONSTRAINT "answers_pkey" PRIMARY KEY ("user_id", "question_id"),
     FOREIGN KEY(board_id) REFERENCES boards(board_id),
     FOREIGN KEY(user_id) REFERENCES users(user_id)
