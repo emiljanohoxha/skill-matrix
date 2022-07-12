@@ -9,8 +9,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { FormComps } from "./formComps/formComps";
 import { useQuery, gql } from "../../../services/hasura-client";
 import { useEffect } from "react";
-import { Typography } from '@mui/material';
 import CustomIcons from "./formComps/paginationComp";
+import AlignItemsList from "./formComps/paginationComp";
 
 export const Form = ({
   increment,
@@ -28,6 +28,8 @@ export const Form = ({
   valueNotes,
   itemData,
   indexRecord,
+  setQuestionIndex,
+  setItemData,
   singleAnswer,
   setValueNotes,
   setValueScore,
@@ -37,40 +39,43 @@ export const Form = ({
   ...props
 }) => {
   const UnansweredAnswers = gql`
-  query GetAllUnansweredAnswers($_eq: Int!) {
-    answers_aggregate(where: { SCORE: { _eq: 0 }, user_id: { _eq: $_eq } }) {
-      aggregate {
-        count(distinct: true)
+    query GetAllUnansweredAnswers($_eq: Int!) {
+      answers_aggregate(where: { SCORE: { _eq: 0 }, user_id: { _eq: $_eq } }) {
+        aggregate {
+          count(distinct: true)
+        }
       }
     }
-  }
-`;
+  `;
 
+  const { error, data, loading, refetch } = useQuery(
+    "GetAllUnansweredAnswers",
+    UnansweredAnswers,
+    {
+      enabled: false,
 
+      variables: {
+        _eq: 1
+      }
+    }
+  );
+  // console.log("questionNumber",questionNumber);/
+  const UnansweredQuestions = data?.answers_aggregate?.aggregate?.count;
 
-const {error, data, loading, refetch } = useQuery("GetAllUnansweredAnswers",UnansweredAnswers, 
-{
-  enabled:false,
-  
-  variables: {
-    _eq:1
-  }
-  
-})
-// console.log("questionNumber",questionNumber);/
-const UnansweredQuestions = data?.answers_aggregate?.aggregate?.count
+  const answeredQuestions = questionNumber - UnansweredQuestions;
+  // console.log(answeredQuestions)
 
-const answeredQuestions = questionNumber - UnansweredQuestions;
-// console.log(answeredQuestions)
+  useEffect(() => {
+    refetch();
+  }, [answeredQuestions, refetch]);
 
-useEffect(() => {
-  refetch();
-}, [answeredQuestions,refetch]);
+  console.log(
+    "numberOfUnansweredAnswers",
+    data?.answers_aggregate?.aggregate?.count
+  );
 
-console.log("numberOfUnansweredAnswers",data?.answers_aggregate?.aggregate?.count)
-
-console.log("item",item)
-console.log("itemdata",itemData)
+  console.log("item", item);
+  console.log("itemdata", itemData);
 
   return (
     <Paper
@@ -84,24 +89,19 @@ console.log("itemdata",itemData)
     >
       <Container>
         <FormComps
-        questionNumber={questionNumber}
-          item={item}
+          questionNumber={questionNumber}
+          answeredQuestions={answeredQuestions}
           labels={labels}
           getLabelText={getLabelText}
           itemData={itemData}
           indexRecord={indexRecord}
           valueNotes={valueNotes}
-         
+          item={item}
           valueScore={valueScore}
           setValueNotes={setValueNotes}
           // setHover={setHover}
           setValueScore={setValueScore}
         />
-        <Box>
-          <Typography>
-              {`${answeredQuestions} \\ ${questionNumber} `}
-          </Typography>
-        </Box>
         <Box
           component="div"
           sx={{
@@ -130,7 +130,12 @@ console.log("itemdata",itemData)
             {/* {console.log(typeof valueNotes)} */}
           </Box>
           <Box>
-          <CustomIcons/>
+            <AlignItemsList
+              item={item}
+              questionNumber={questionNumber}
+              setItemData={setItemData}
+              setQuestionIndex={setQuestionIndex}
+            />
           </Box>
           <Box>
             <ButtonGroup
@@ -140,7 +145,8 @@ console.log("itemdata",itemData)
                 display: "flex",
                 justifyContent: "end",
                 mr: 5,
-                mt: 2
+                mt: 2,
+                mb: 5
               }}
             >
               <Button
@@ -155,11 +161,10 @@ console.log("itemdata",itemData)
               </Button>
 
               <Button
-                onClick={
-                  () => {
-                    refetch();
-                    handleQuestionIncrement();}
-                  }
+                onClick={() => {
+                  refetch();
+                  handleQuestionIncrement();
+                }}
                 color="primary"
                 variant="contained"
                 endIcon={<NavigateNextIcon />}
