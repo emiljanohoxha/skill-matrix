@@ -1,5 +1,3 @@
-
-
 import Box from "@mui/material/Box";
 import Reating from "@mui/material/Rating";
 import StartIcon from "@mui/icons-material/Start";

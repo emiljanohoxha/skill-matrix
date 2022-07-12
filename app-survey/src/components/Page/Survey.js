@@ -37,12 +37,6 @@ export const Survey = ({
   const [valueNotes, setValueNotes] = useState("");
   const [value, setValue] = useState("");
 
-  console.log(singleData);
-  console.log("itemii 2", singleData?.answers_by_pk?.SCORE);
-
-  // console.log("value",value);
-  // console.log(item2?.questions[indexRecord]?.board?.answers[indexRecord]?.NOTES)
-
   useEffect(() => {
     setValueNotes(
       typeof singleData?.answers_by_pk?.NOTES === "string"

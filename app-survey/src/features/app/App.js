@@ -3,7 +3,7 @@ import Page from "../../components/Page";
 import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
@@ -92,16 +92,16 @@ export const App = () => {
     }
   );
 
-  // console.log("Test 2", test2.data)
+  useEffect(() => {
+    refetch();
+  }, [question_index]);
 
   const handleQuestionIncrement = () => {
     if (itemData < test2?.data?.questions?.length - 1) {
       setItemData(itemData + 1);
       setQuestionIndex((question_index) => question_index + 1);
-      refetch();
     } else {
       setQuestionIndex((question_index) => question_index);
-      refetch();
     }
   };
 
@@ -109,11 +109,9 @@ export const App = () => {
     if (itemData > 0) {
       setItemData((itemData) => itemData - 1);
       setQuestionIndex((question_index) => question_index - 1);
-      refetch();
     } else {
       setItemData(itemData);
       setQuestionIndex(question_index);
-      refetch();
     }
   };
 
