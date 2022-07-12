@@ -25,7 +25,6 @@ export const Form = ({
   valueNotes,
   itemData,
   indexRecord,
-  item2,
   singleAnswer,
   setValue,
   setHover,
@@ -52,7 +51,7 @@ export const Form = ({
           labels={labels}
           getLabelText={getLabelText}
           itemData={itemData}
-          item2={item2}
+     
           indexRecord={indexRecord}
           value={value}
           setValue={setValue}
