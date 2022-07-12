@@ -1,9 +1,11 @@
 import { useQuery, gql } from "../../services/hasura-client";
+import {useMutation} from "../../services/hasura-client/use-mutation" 
 import Page from "../../components/Page";
 import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
+
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
@@ -93,7 +95,7 @@ export const App = () => {
 
   //answers input state
   const [valueNotes, setValueNotes] = useState("");
-  const [valueScore, setValueScore] = useState("");
+  const [valueScore, setValueScore] = useState(0);
 
   const { error, data, loading, refetch } = useQuery(
     "GetAnswerById",
@@ -111,8 +113,27 @@ export const App = () => {
     refetch();
   }, [question_index, refetch]);
 
+  
+  const questionNumber = test2?.data?.questions?.length;
+  const [progress, setProgress] = useState("");
+
+  
+  //answers input state
+  
+  const answerMutation = useMutation(SaveAnswer, {
+    variables: {
+      user_id: 1,
+      question_id: test2?.data?.questions[question_index]?.question_id,
+      SCORE: valueScore*20,
+      NOTES: valueNotes,
+      _eq1_question_id: test2?.data?.questions[question_index]?.question_id,
+      _eq_user_id: 1
+    }
+
+  });
   const handleQuestionIncrement = () => {
     if (itemData < test2?.data?.questions?.length - 1) {
+      answerMutation.mutate();
       setItemData(itemData + 1);
       setQuestionIndex((question_index) => question_index + 1);
     } else {
@@ -122,6 +143,7 @@ export const App = () => {
 
   const handleQuestionDecrement = () => {
     if (itemData > 0) {
+      answerMutation.mutate();
       setItemData((itemData) => itemData - 1);
       setQuestionIndex((question_index) => question_index - 1);
     } else {
@@ -149,17 +171,16 @@ export const App = () => {
           path="/survey"
           element={
             <Survey
-            handleQuestionIncrement={handleQuestionIncrement}
-            handleQuestionDecrement={handleQuestionDecrement}
-            itemData={itemData}
-            item={test2.data}
-            setValueNotes={setValueNotes}
-            setValueScore={setValueScore}
-            valueNotes={valueNotes}
-            valueScore={valueScore}
-
-            // item2={test1.data}
-            singleData={data}
+              handleQuestionIncrement={handleQuestionIncrement}
+              handleQuestionDecrement={handleQuestionDecrement}
+              itemData={itemData}
+              item={test2.data}
+              setValueNotes={setValueNotes}
+              setValueScore={setValueScore}
+              valueNotes={valueNotes}
+              valueScore={valueScore}
+              // item2={test1.data}
+              singleData={data}
             />
           }
         />
