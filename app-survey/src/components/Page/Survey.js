@@ -10,7 +10,6 @@ export const Survey = ({
   itemData,
   handleQuestionDecrement,
   handleQuestionIncrement,
-  // item2,
   singleAnswer,
   children,
   ...props
@@ -64,7 +63,6 @@ export const Survey = ({
         value={value}
         valueNotes={valueNotes}
         itemData={itemData}
-        //  indexRecord={indexRecord}
         labels={labels}
         handleQuestionIncrement={handleQuestionIncrement}
         handleQuestionDecrement={handleQuestionDecrement}

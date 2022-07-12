@@ -94,7 +94,7 @@ export const App = () => {
 
   useEffect(() => {
     refetch();
-  }, [question_index]);
+  }, [question_index, refetch]);
 
   const handleQuestionIncrement = () => {
     if (itemData < test2?.data?.questions?.length - 1) {

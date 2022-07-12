@@ -5,8 +5,6 @@ import StartIcon from "@mui/icons-material/Start";
 export const FormComps = ({
   item,
   itemData,
-  item2,
-  indexRecord,
   value,
   setValue,
   setHover,

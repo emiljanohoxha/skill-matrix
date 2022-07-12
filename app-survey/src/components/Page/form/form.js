@@ -6,9 +6,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TextField from "@mui/material/TextField";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { useState } from "react";
 import { FormComps } from "./formComps/formComps";
-
 
 export const Form = ({
   increment,
@@ -34,7 +32,6 @@ export const Form = ({
   children,
   ...props
 }) => {
-
   return (
     <Paper
       {...props}
@@ -51,7 +48,6 @@ export const Form = ({
           labels={labels}
           getLabelText={getLabelText}
           itemData={itemData}
-     
           indexRecord={indexRecord}
           value={value}
           setValue={setValue}
@@ -95,23 +91,18 @@ export const Form = ({
               }}
             >
               <Button
-                onClick={
-                    handleQuestionDecrement
-                  
-                }
+                onClick={handleQuestionDecrement}
                 color="primary"
                 variant="contained"
                 startIcon={<ArrowBackIcon />}
                 actions={actions}
-                // disabled={itemData === 0}
+                disabled={itemData === 0}
               >
                 Prev
               </Button>
 
               <Button
-                onClick={
-                  handleQuestionIncrement
-                }
+                onClick={handleQuestionIncrement}
                 color="primary"
                 variant="contained"
                 endIcon={<NavigateNextIcon />}
