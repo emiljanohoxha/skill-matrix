@@ -86,21 +86,14 @@ const SaveAnswer = gql`
     }
   }
 `;
-const UnansweredAnswers = gql`
-  query GetAllUnansweredAnswers($_eq: Int!) {
-    answers_aggregate(where: { SCORE: { _eq: 0 }, user_id: { _eq: $_eq } }) {
-      aggregate {
-        count(distinct: true)
-      }
-    }
-  }
-`;
+
 
 export const App = () => {
   const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
 
   const [question_index, setQuestionIndex] = useState(0);
   const [itemData, setItemData] = useState(0);
+
 
   //answers input state
   const [valueNotes, setValueNotes] = useState("");
@@ -177,6 +170,7 @@ export const App = () => {
           path="/survey"
           element={
             <Survey
+            questionNumber={questionNumber}
               handleQuestionIncrement={handleQuestionIncrement}
               handleQuestionDecrement={handleQuestionDecrement}
               itemData={itemData}

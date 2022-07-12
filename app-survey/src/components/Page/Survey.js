@@ -4,6 +4,7 @@ import { Form } from "./form/form";
 export const Survey = ({
   singleData,
   title,
+  questionNumber,
   actions,
   withPadding,
   item,
@@ -57,6 +58,7 @@ export const Survey = ({
     <div>
       <Form
          title={title}
+         questionNumber={questionNumber}
          actions={actions}
          withPadding={withPadding}
          item={item}
