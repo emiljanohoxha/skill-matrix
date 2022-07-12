@@ -15,3 +15,14 @@ Decided to restructure the questions page with different react components,
 which have parent-child relationship.Previously we were rendering the questions
 using a single component.This change will make it easier to extend the app,
 and reuse some components on later stages of the project.
+
+# Day 5
+
+Implemented the logic to save answers in the database, while the user is 
+answering questions.
+
+
+
+
+
+

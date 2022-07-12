@@ -1,11 +1,10 @@
 import { useQuery, gql } from "../../services/hasura-client";
-import {useMutation} from "../../services/hasura-client/use-mutation" 
+import { useMutation } from "../../services/hasura-client/use-mutation";
 import Page from "../../components/Page";
 import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
-
 
 const PING_ACTION_QUERY = gql`
   query MyQuery {
@@ -87,6 +86,16 @@ const SaveAnswer = gql`
     }
   }
 `;
+const UnansweredAnswers = gql`
+  query GetAllUnansweredAnswers($_eq: Int!) {
+    answers_aggregate(where: { SCORE: { _eq: 0 }, user_id: { _eq: $_eq } }) {
+      aggregate {
+        count(distinct: true)
+      }
+    }
+  }
+`;
+
 export const App = () => {
   const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
 
@@ -113,23 +122,20 @@ export const App = () => {
     refetch();
   }, [question_index, refetch]);
 
-  
   const questionNumber = test2?.data?.questions?.length;
   const [progress, setProgress] = useState("");
 
-  
   //answers input state
-  
+
   const answerMutation = useMutation(SaveAnswer, {
     variables: {
       user_id: 1,
       question_id: test2?.data?.questions[question_index]?.question_id,
-      SCORE: valueScore*20,
+      SCORE: valueScore * 20,
       NOTES: valueNotes,
       _eq1_question_id: test2?.data?.questions[question_index]?.question_id,
       _eq_user_id: 1
     }
-
   });
   const handleQuestionIncrement = () => {
     if (itemData < test2?.data?.questions?.length - 1) {
