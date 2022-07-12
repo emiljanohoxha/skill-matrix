@@ -53,19 +53,30 @@ const GetAnswerByAnswerId = gql`
 `;
 
 const SaveAnswer = gql`
-  mutation MyMutation {
+  mutation MyMutation(
+    $NOTES: String
+    $SCORE: Int
+    $board_id: Int
+    $question_id: Int
+    $user_id: Int
+    $_eq_user_id: Int
+    $_eq1_question_id: Int
+  ) {
     insert_answers_one(
       object: {
-        NOTES: "testss 4"
-        SCORE: 30
-        user_id: 1
-        question_id: 18
-        board_id: 1
+        NOTES: $NOTES
+        SCORE: $SCORE
+        user_id: $user_id
+        question_id: $question_id
+        board_id: $board_id
       }
       on_conflict: {
         constraint: answers_pkey
         update_columns: [SCORE, NOTES]
-        where: { question_id: { _eq: 18 }, user_id: { _eq: 1 } }
+        where: {
+          question_id: { _eq: $_eq1_question_id }
+          user_id: { _eq: $_eq_user_id }
+        }
       }
     ) {
       SCORE
