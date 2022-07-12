@@ -11,6 +11,10 @@ export const Survey = ({
   handleQuestionDecrement,
   handleQuestionIncrement,
   singleAnswer,
+  setValueScore,
+  setValueNotes,
+  valueScore,
+  valueNotes,
   children,
   ...props
 }) => {
@@ -33,9 +37,6 @@ export const Survey = ({
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
 
-  const [valueNotes, setValueNotes] = useState("");
-  const [value, setValue] = useState("");
-
   useEffect(() => {
     setValueNotes(
       typeof singleData?.answers_by_pk?.NOTES === "string"
@@ -45,7 +46,7 @@ export const Survey = ({
   }, [singleData]);
 
   useEffect(() => {
-    setValue(
+    setValueScore(
       typeof singleData?.answers_by_pk?.SCORE / 20 == "null"
         ? 0
         : singleData?.answers_by_pk?.SCORE / 20
@@ -55,19 +56,20 @@ export const Survey = ({
   return (
     <div>
       <Form
-        title={title}
-        actions={actions}
-        withPadding={withPadding}
-        item={item}
-        setValue={setValue}
-        value={value}
-        valueNotes={valueNotes}
-        itemData={itemData}
-        labels={labels}
-        handleQuestionIncrement={handleQuestionIncrement}
-        handleQuestionDecrement={handleQuestionDecrement}
-        getLabelText={getLabelText}
-        setHover={setHover}
+         title={title}
+         actions={actions}
+         withPadding={withPadding}
+         item={item}
+         setValueScore={setValueScore}
+         valueScore={valueScore}
+         valueNotes={valueNotes}
+         setValueNotes={setValueNotes}
+         itemData={itemData}
+         labels={labels}
+         handleQuestionIncrement={handleQuestionIncrement}
+         handleQuestionDecrement={handleQuestionDecrement}
+         getLabelText={getLabelText}
+         // setHover={setHover}
       />
     </div>
   );

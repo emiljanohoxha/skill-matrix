@@ -5,9 +5,11 @@ import StartIcon from "@mui/icons-material/Start";
 export const FormComps = ({
   item,
   itemData,
-  value,
-  setValue,
-  setHover,
+  indexRecord,
+  valueNotes,
+  valueScore,
+  setValueNotes,
+  setValueScore,
   hover,
   labels,
   getLabelText
@@ -47,25 +49,23 @@ export const FormComps = ({
       >
         {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
         <Reating
-          sx={{
-            fontSize: 40
-          }}
-          name="hover-feedback"
-          value={value}
-          precision={0.5}
-          getLabelText={getLabelText}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-          emptyIcon={<StartIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-        />
-        {value !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-        )}
-        {/* {console.log(value)} */}
+               sx={{
+                fontSize: 40
+              }}
+              name="hover-feedback"
+              value={valueScore}
+              precision={0.5}
+              getLabelText={getLabelText}
+              onChange={(event, newValue) => {
+                setValueScore(newValue);
+                 }}
+                emptyIcon={<StartIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                {console.log(valueScore)}
+            {valueScore !== null && (
+              <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : valueScore]}</Box>
+            )}
+            {/* {console.log(value)} */}
       </Box>
     </>
   );

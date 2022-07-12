@@ -19,14 +19,13 @@ export const Form = ({
   actions,
   withPadding,
   item,
-  value,
+  valueScore,
   valueNotes,
   itemData,
   indexRecord,
   singleAnswer,
-  setValue,
-  setHover,
-  hover,
+  setValueNotes,
+  setValueScore,
   labels,
   getLabelText,
   children,
@@ -44,14 +43,16 @@ export const Form = ({
     >
       <Container>
         <FormComps
-          item={item}
-          labels={labels}
-          getLabelText={getLabelText}
-          itemData={itemData}
-          indexRecord={indexRecord}
-          value={value}
-          setValue={setValue}
-          setHover={setHover}
+           item={item}
+           labels={labels}
+           getLabelText={getLabelText}
+           itemData={itemData}
+           indexRecord={indexRecord}
+           valueNotes={valueNotes}
+           valueScore={valueScore}
+           setValueNotes={setValueNotes}
+           // setHover={setHover}
+           setValueScore={setValueScore}
         />
         <Box
           component="div"

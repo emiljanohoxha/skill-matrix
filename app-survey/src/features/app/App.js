@@ -91,6 +91,10 @@ export const App = () => {
   const [question_index, setQuestionIndex] = useState(0);
   const [itemData, setItemData] = useState(0);
 
+  //answers input state
+  const [valueNotes, setValueNotes] = useState("");
+  const [valueScore, setValueScore] = useState("");
+
   const { error, data, loading, refetch } = useQuery(
     "GetAnswerById",
     GetAnswerByAnswerId,
@@ -145,12 +149,17 @@ export const App = () => {
           path="/survey"
           element={
             <Survey
-              handleQuestionIncrement={handleQuestionIncrement}
-              handleQuestionDecrement={handleQuestionDecrement}
-              itemData={itemData}
-              item={test2.data}
-              // item2={test1.data}
-              singleData={data}
+            handleQuestionIncrement={handleQuestionIncrement}
+            handleQuestionDecrement={handleQuestionDecrement}
+            itemData={itemData}
+            item={test2.data}
+            setValueNotes={setValueNotes}
+            setValueScore={setValueScore}
+            valueNotes={valueNotes}
+            valueScore={valueScore}
+
+            // item2={test1.data}
+            singleData={data}
             />
           }
         />
