@@ -8,6 +8,20 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: form
+    permission:
+      check: {}
+      columns:
+        - NOTES
+        - SCORE
+        - board_id
+        - created_at
+        - data
+        - is_submited
+        - question_id
+        - updated_at
+        - user_id
 select_permissions:
   - role: form
     permission:
@@ -22,3 +36,18 @@ select_permissions:
         - created_at
         - updated_at
       filter: {}
+update_permissions:
+  - role: form
+    permission:
+      columns:
+        - NOTES
+        - SCORE
+        - board_id
+        - created_at
+        - data
+        - is_submited
+        - question_id
+        - updated_at
+        - user_id
+      filter: {}
+      check: null
