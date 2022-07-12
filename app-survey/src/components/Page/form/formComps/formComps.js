@@ -1,71 +1,129 @@
 import Box from "@mui/material/Box";
-import Reating from "@mui/material/Rating";
-import StartIcon from "@mui/icons-material/Start";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import TextField from "@mui/material/TextField";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useState } from "react";
+import { FormComps } from "./formComps/formComps";
 
-export const FormComps = ({
+
+export const Form = ({
+  increment,
+  decrement,
+  handleDecrement,
+  handleIncrement,
+  handleQuestionDecrement,
+  handleQuestionIncrement,
+  title,
+  actions,
+  withPadding,
   item,
-  itemData,
-  item2,
-  indexRecord,
   value,
+  valueNotes,
+  itemData,
+  indexRecord,
+  item2,
+  singleAnswer,
   setValue,
   setHover,
   hover,
   labels,
-  getLabelText
+  getLabelText,
+  children,
+  ...props
 }) => {
+
   return (
-    <>
-      <Box
-        sx={{
-          p: 5
-        }}
-      >
+    <Paper
+      {...props}
+      sx={{
+        marginTop: 15,
+        width: "75vw",
+        minHeight: "75%",
+        backgroundColor: "#a8dadc"
+      }}
+    >
+      <Container>
+        <FormComps
+          item={item}
+          labels={labels}
+          getLabelText={getLabelText}
+          itemData={itemData}
+          item2={item2}
+          indexRecord={indexRecord}
+          value={value}
+          setValue={setValue}
+          setHover={setHover}
+        />
         <Box
+          component="div"
           sx={{
             display: "flex",
-            justifyContent: "center",
-            p: 5,
-            fontSize: 22,
-            backgroundColor: "#457b9d",
-            color: "white"
+            justifyContent: "space-between",
+            mt: 1
           }}
         >
-          {item?.questions[itemData].data.text}
-        </Box>
-      </Box>
+          <Box
+            component="div"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              ml: 5
+            }}
+          >
+            <TextField
+              id="outlined-basic"
+              label="Notes"
+              value={valueNotes}
+              multiline
+              maxRows={4}
+              variant="outlined"
+            />
+            {/* {console.log(typeof valueNotes)} */}
+          </Box>
+          <Box>
+            <ButtonGroup
+              disableElevation
+              variant="contained"
+              sx={{
+                display: "flex",
+                justifyContent: "end",
+                mr: 5,
+                mt: 2
+              }}
+            >
+              <Button
+                onClick={
+                    handleQuestionDecrement
+                  
+                }
+                color="primary"
+                variant="contained"
+                startIcon={<ArrowBackIcon />}
+                actions={actions}
+                // disabled={itemData === 0}
+              >
+                Prev
+              </Button>
 
-      <Box
-        component="div"
-        display="inline"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mt: 10
-        }}
-      >
-        {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE}
-        <Reating
-          sx={{
-            fontSize: 40
-          }}
-          name="hover-feedback"
-          value={value}
-          precision={0.5}
-          getLabelText={getLabelText}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-          emptyIcon={<StartIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-        />
-        {value !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-        )}
-        {console.log(value)}
-      </Box>
-    </>
+              <Button
+                onClick={
+                  handleQuestionIncrement
+                }
+                color="primary"
+                variant="contained"
+                endIcon={<NavigateNextIcon />}
+                actions={actions}
+              >
+                Next
+              </Button>
+            </ButtonGroup>
+          </Box>
+        </Box>
+      </Container>
+    </Paper>
   );
 };

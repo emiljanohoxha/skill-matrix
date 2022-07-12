@@ -52,6 +52,28 @@ const GetAnswerByAnswerId = gql`
   }
 `;
 
+const SaveAnswer = gql`
+  mutation MyMutation {
+    insert_answers_one(
+      object: {
+        NOTES: "testss 4"
+        SCORE: 30
+        user_id: 1
+        question_id: 18
+        board_id: 1
+      }
+      on_conflict: {
+        constraint: answers_pkey
+        update_columns: [SCORE, NOTES]
+        where: { question_id: { _eq: 18 }, user_id: { _eq: 1 } }
+      }
+    ) {
+      SCORE
+      NOTES
+      answer_id
+    }
+  }
+`;
 export const App = () => {
   const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
 
