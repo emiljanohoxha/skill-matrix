@@ -43,16 +43,16 @@ export const Form = ({
     >
       <Container>
         <FormComps
-           item={item}
-           labels={labels}
-           getLabelText={getLabelText}
-           itemData={itemData}
-           indexRecord={indexRecord}
-           valueNotes={valueNotes}
-           valueScore={valueScore}
-           setValueNotes={setValueNotes}
-           // setHover={setHover}
-           setValueScore={setValueScore}
+          item={item}
+          labels={labels}
+          getLabelText={getLabelText}
+          itemData={itemData}
+          indexRecord={indexRecord}
+          valueNotes={valueNotes}
+          valueScore={valueScore}
+          setValueNotes={setValueNotes}
+          // setHover={setHover}
+          setValueScore={setValueScore}
         />
         <Box
           component="div"
@@ -74,6 +74,7 @@ export const Form = ({
               id="outlined-basic"
               label="Notes"
               value={valueNotes}
+              onChange={(e) => setValueNotes(e.target.value)}
               multiline
               maxRows={4}
               variant="outlined"

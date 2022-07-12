@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Reating from "@mui/material/Rating";
 import StartIcon from "@mui/icons-material/Start";
+import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
 export const FormComps = ({
   item,
@@ -49,23 +50,25 @@ export const FormComps = ({
       >
         {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
         <Reating
-               sx={{
-                fontSize: 40
-              }}
-              name="hover-feedback"
-              value={valueScore}
-              precision={0.5}
-              getLabelText={getLabelText}
-              onChange={(event, newValue) => {
-                setValueScore(newValue);
-                 }}
-                emptyIcon={<StartIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-                {console.log(valueScore)}
-            {valueScore !== null && (
-              <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : valueScore]}</Box>
-            )}
-            {/* {console.log(value)} */}
+          sx={{
+            fontSize: 40
+          }}
+          name="hover-feedback"
+          value={valueScore}
+          precision={0.5}
+          getLabelText={getLabelText}
+          onChange={(event, newValue) => {
+            setValueScore(newValue);
+          }}
+          emptyIcon={
+            <StarOutlineIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+          }
+        />
+        {console.log(valueScore)}
+        {valueScore !== null && (
+          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : valueScore]}</Box>
+        )}
+        {/* {console.log(value)} */}
       </Box>
     </>
   );
