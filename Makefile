@@ -64,6 +64,8 @@ init:
 	(make seed)
 
 seed:
+	@echo "Seeding the main database from: \"question_types.sql\"..."
+	@hasura seed apply --project hasura-migrations --database-name $(project) --file question_types.sql
 	@echo "Seeding the main database from: \"users.sql\"..."
 	@hasura seed apply --project hasura-migrations --database-name $(project) --file users.sql
 	@echo "Seeding the main database from: \"boards.sql\"..."

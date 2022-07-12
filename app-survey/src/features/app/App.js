@@ -6,7 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
 
-const PING_ACTION_QUERY = gql`
+const GetAllQuestions = gql`
   query MyQuery {
     questions {
       question_id
@@ -87,13 +87,11 @@ const SaveAnswer = gql`
   }
 `;
 
-
 export const App = () => {
-  const test2 = useQuery("MyQuery", PING_ACTION_QUERY);
+  const test2 = useQuery("MyQuery", GetAllQuestions);
 
   const [question_index, setQuestionIndex] = useState(0);
   const [itemData, setItemData] = useState(0);
-
 
   //answers input state
   const [valueNotes, setValueNotes] = useState("");
@@ -170,7 +168,7 @@ export const App = () => {
           path="/survey"
           element={
             <Survey
-            questionNumber={questionNumber}
+              questionNumber={questionNumber}
               handleQuestionIncrement={handleQuestionIncrement}
               handleQuestionDecrement={handleQuestionDecrement}
               itemData={itemData}
