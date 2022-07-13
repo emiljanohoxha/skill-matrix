@@ -10,8 +10,11 @@ const GetAllQuestions = gql`
   query MyQuery {
     questions {
       question_id
+      board_id
+      created_at
       data
-      type
+      is_deleted
+      question_type_id
     }
   }
 `;
@@ -21,7 +24,7 @@ const GetAllQuestionsPlusAnswers = gql`
     questions {
       board_id
       created_at
-      type
+      question_type_id
       question_id
       is_deleted
       data
