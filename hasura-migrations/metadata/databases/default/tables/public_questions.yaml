@@ -12,7 +12,7 @@ select_permissions:
         - is_deleted
         - board_id
         - question_id
+        - question_type_id
         - data
-        - type
         - created_at
       filter: {}
