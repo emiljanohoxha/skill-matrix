@@ -90,6 +90,17 @@ const SaveAnswer = gql`
   }
 `;
 
+const submitAnswer = gql`
+  mutation MyMutation($_eq: Int) {
+    update_answers(
+      where: { user_id: { _eq: $_eq } }
+      _set: { is_submited: true }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
 export const App = () => {
   const test2 = useQuery("MyQuery", GetAllQuestions);
 
