@@ -67,7 +67,7 @@ export default function CustomizedSlider({ valueScore, setValueScore }) {
 
   return (
     <Box sx={{ width: 320 }}>
-      <Typography gutterBottom>pretto.fr</Typography>
+    
       <PrettoSlider
         valueLabelDisplay="auto"
         aria-label="pretto slider"

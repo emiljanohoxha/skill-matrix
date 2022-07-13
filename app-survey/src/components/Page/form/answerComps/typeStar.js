@@ -15,11 +15,7 @@ export const TypeStar = ({
     <Box
       component="div"
       display="inline"
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        mb: 10
-      }}
+     
     >
       {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
       <Reating
