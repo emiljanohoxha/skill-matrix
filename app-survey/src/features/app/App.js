@@ -5,7 +5,7 @@ import { Logout } from "./Logout";
 import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
-
+import { Review } from "../../components/Page/Review";
 const GetAllQuestions = gql`
   query MyQuery {
     questions {
