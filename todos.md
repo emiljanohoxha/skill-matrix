@@ -22,7 +22,7 @@
 - [ ] Redirect user to end if no answers are available  
 - [x] previous/next buttons component  
 - [x] Answer component  
-- [ ] Automatically save answer when pressing next/previous button  
+- [x] Automatically save answer when pressing next/previous button  
 - [ ] Congratulation component on completing answer  
 ## 4. Username  
 - [ ] User profile should be public  
