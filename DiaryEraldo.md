@@ -14,3 +14,18 @@ The day started by working on some proper queries to get certain data for fronte
 It was a little bit challenging because the data we get from query should be the proper way
 to get easily on UI component.
 I implemented the logic for answers, which is a simple rating form. This took some time to finshed it. The brainstorming today took us on refactoring the code.(structure the component by hierarchy)
+
+### Day 5 Tuesday
+
+For today work I would say it was great!
+1-Managed to fix the bug we had on getting the right answer.
+2-Implemented correctly mutation to update and insert(upsert) the user answer.
+3-Added a component which user is capable to see the progess by showing him all answers completed.
+4-Added a pagination to direct the user to specific question.
+5-Refactored some piece of code.
+
+### Struggles
+
+The first hassle was on fixing the bug which nearly took us 1-2hours.
+The second thing important was implementing the mutation to update and insert the given user answer.
+Other challenges faced were more unexpected for example we forget to change the permissions in hasura.

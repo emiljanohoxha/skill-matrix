@@ -4,19 +4,21 @@ import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box";
 
 
-export default function AlignItemsList({ item,questionNumber,setItemData,setQuestionIndex }) {
-        console.log("quest erald",questionNumber)
-        const handleChangePage = (e, n) => {
-            console.log("n",n);
-            setItemData(n);
-            setQuestionIndex(n);
-            // getData(n);
-          };
+
+
+export default function AlignItemsList({ item, questionNumber, setItemData, setQuestionIndex }) {
+  console.log("quest erald", questionNumber)
+  const handleChangePage = (e, n) => {
+    console.log("n", n);
+    setItemData(n);
+    setQuestionIndex(n);
+    // getData(n);
+
+  };
+
   return (
     <Container fixed>
-
       <Box>
-       
         <Pagination
           count={questionNumber} //length of questions
           variant="outlined"
@@ -27,11 +29,13 @@ export default function AlignItemsList({ item,questionNumber,setItemData,setQues
             display: "flex",
             justifyContent: "center",
             ml: 2
-          }}
-          onChange={(e,n)=>handleChangePage(e,n)}
-        />
 
+          }}
+          onChange={(e, n) => handleChangePage(e, n)}
+        />
       </Box>
     </Container>
+
   );
+
 }

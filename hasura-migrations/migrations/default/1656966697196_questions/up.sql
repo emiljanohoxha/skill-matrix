@@ -1,7 +1,7 @@
 CREATE TABLE "public"."questions" (
   "question_id" INT GENERATED ALWAYS AS IDENTITY,
   "board_id" INT NOT NULL,
-  "type" TEXT NOT NULL,
+  "question_type_id" INT NOT NULL DEFAULT 1,
   "data" JSON NOT NULL,
   "is_deleted" BOOLEAN NOT NULL DEFAULT false,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT clock_timestamp(),

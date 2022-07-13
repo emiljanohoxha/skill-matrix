@@ -19,8 +19,12 @@ and reuse some components on later stages of the project.
 # Day 5
 
 Implemented the logic to save answers in the database, while the user is 
-answering questions.
-
+answering questions.Added the logic to get the number of unanswered questions.
+Added support for multiple question types.After a user has completed a survey,
+we need to make some statistics using the answer values,so the answers need to be of 
+the same numeric type.To display differnt type of questions I created a table n the database
+which holds the question type and a conversion factor.Using this logic we can display the same
+value in many different ways.
 
 
 
