@@ -2,7 +2,9 @@ import Box from "@mui/material/Box";
 import Reating from "@mui/material/Rating";
 import StartIcon from "@mui/icons-material/Start";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
+import { TypeStar } from "../answerComps/typeStar";
+import CustomizedSlider from "../answerComps/typeSlider";
 
 export const FormComps = ({
   item,
@@ -33,9 +35,9 @@ export const FormComps = ({
             fontSize: 30,
             // backgroundColor: "#457b9d",
             // color: "white"
-            fontFamily:"Poppins",
-            fontWeight:600,
-            letterSpacing:"3px"
+            fontFamily: "Poppins",
+            fontWeight: 600,
+            letterSpacing: "3px"
           }}
         >
           {console.log("item", item)}
@@ -44,57 +46,32 @@ export const FormComps = ({
           {item?.questions[itemData]?.data?.text}
         </Box>
       </Box>
-      <Box sx={
-          {
-            display:"flex",
-            justifyContent:"end",
-            mr:10,
-          }
-        }>
-      <Box sx={
-        {
-          border:"1px solid #457b9d",
-          padding:1
-        }
-      }>
-          <Typography>
-              {`${answeredQuestions} / ${questionNumber} `}
-          </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "end",
+          mr: 10
+        }}
+      >
+        <Box
+          sx={{
+            border: "1px solid #457b9d",
+            padding: 1
+          }}
+        >
+          <Typography>{`${answeredQuestions} / ${questionNumber} `}</Typography>
         </Box>
       </Box>
 
-      <Box
-        component="div"
-        display="inline"
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          mb:10
-          
-        }}
-      >
-        {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
-        <Reating
-          sx={{
-            fontSize: 70
-          }}
-          name="hover-feedback"
-          value={valueScore}
-          precision={0.5}
-          getLabelText={getLabelText}
-          onChange={(event, newValue) => {
-            setValueScore(newValue);
-          }}
-          emptyIcon={
-            <StarOutlineIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-          }
-        />
-        {console.log(valueScore)}
-        {valueScore !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : valueScore]}</Box>
-        )}
-        {/* {console.log(value)} */}
-      </Box>
+      {/* {
+        if ()
+      } */}
+
+      <CustomizedSlider valueScore={valueScore} setValueScore={setValueScore} />
+      {/* <TypeStar valueScore={valueScore}  getLabelText={getLabelText} setValueScore={setValueScore}
+     hover={hover}
+     labels={labels} 
+      />  */}
     </>
   );
 };

@@ -25,7 +25,7 @@ For today work I would say it was great!
 5-Refactored some piece of code.
 
 ### Struggles
-
+ 
 The first hassle was on fixing the bug which nearly took us 1-2hours.
 The second thing important was implementing the mutation to update and insert the given user answer.
 Other challenges faced were more unexpected for example we forget to change the permissions in hasura.
