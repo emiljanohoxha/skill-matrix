@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
 import { Review } from "../../components/Page/Review";
+
 const GetAllQuestions = gql`
   query MyQuery {
     questions {
@@ -15,28 +16,6 @@ const GetAllQuestions = gql`
       data
       is_deleted
       question_type_id
-    }
-  }
-`;
-
-const GetAllQuestionsPlusAnswers = gql`
-  query MyQuery {
-    questions {
-      board_id
-      created_at
-      question_type_id
-      question_id
-      is_deleted
-      data
-      board {
-        answers(where: { question_id: { _eq: 1 }, user_id: { _eq: 1 } }) {
-          NOTES
-          SCORE
-          board_id
-          created_at
-          updated_at
-        }
-      }
     }
   }
 `;
@@ -198,7 +177,16 @@ export const App = () => {
             />
           }
         />
-        <Route path="/review" element={<Review item={test2.data} />} />
+        <Route
+          path="/review"
+          element={
+            <Review
+              item={test2.data}
+              valueScore={valueScore}
+              setValueScore={setValueScore}
+            />
+          }
+        />
       </Routes>
     </>
   );
