@@ -13,3 +13,10 @@ get them in a proper way, in order to use them easily in frontend./
 --We managed to get the data in a proper way and tried to implement logic into frontend to connect them with MUI components./
 --After we analyzed our code we decided to refactor a little bit and restructure our components in order to make our lifes easier,
 we created some mockups and tried to put it into action.
+
+## Day 5, Tuesday
+
+We started the day with a bug from the weekend consisting in getting some specific queries,/ 
+and with the help of our mentor Rezart we managed to fix it and keep going on the project in adding mutation to make insert and update,/ 
+we managed to put it into project really quick with some little issiues,/
+later on we added some other features like a progress and pagination component,and also tried to refactor dhe code ando make it more clean.
