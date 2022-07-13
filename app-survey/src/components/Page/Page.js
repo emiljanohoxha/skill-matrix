@@ -9,9 +9,8 @@ export const PageTitle = ({ actions, children }) => (
   <Box
     sx={{
       display: "flex",
-      borderBottom: "2px solid black",
-      borderColor: "primary.light",
-      p: 2
+      p: 2,
+
     }}
   >
     {children && (
@@ -53,7 +52,7 @@ export const Page = ({
     <Paper
       {...props}
       sx={{
-        marginTop: 15,
+        mt: 6,
         width: "75vw",
         minHeight: "65%"
       }}
@@ -68,8 +67,9 @@ export const Page = ({
         <Box
           sx={{
             p: withPadding ? 20 : 0,
-            backgroundColor: "#e6e8e6",
-            borderBottom: "2px solid black"
+            backgroundColor: "#f9dcc4",
+            fontSize: 22,
+            fontFamily: "Prisma Text"
           }}
         >
           We're a startup company looking to learn more about how women buy
@@ -82,7 +82,9 @@ export const Page = ({
         sx={{
           display: "flex",
           justifyContent: "center",
-          mt: 5
+          alignContent: "center",
+          mt: 3
+
         }}
       >
         <Button

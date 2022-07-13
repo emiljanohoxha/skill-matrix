@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Reating from "@mui/material/Rating";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Button from "@mui/material/Button";
-
+import { Typography } from '@mui/material';
 import TypeSliderReview from "../reviewTypes/typeSlider";
 import TypeRadioReview from "../reviewTypes/typeRadio";
 import TypeStarReview from "../reviewTypes/typeStar";
@@ -79,23 +79,44 @@ export const Review = ({ item, valueScore, setValueScore }) => {
   return (
     <Paper
       sx={{
-        marginTop: 1,
+        // marginTop: 5,
         width: "50vw",
-        minHeight: "500px",
-        backgroundColor: "#f4978e",
-        pl: 5,
-        pt: 5
+        minHeight: "50%",
+        backgroundColor: "#f8edeb",
+        // pl: 5,
+        // pt: 5
       }}
     >
+      <Box sx={{
+        display:"flex",
+        justifyContent:"center",
+        mb:2,
+        p:2,
+        backgroundColor: "gainsboro"
+      }}>
+        <Typography sx={{
+          fontFamily: "Didot Modern",
+          fontSize:28
+        }}>Review Survey</Typography>
+      </Box>
+
       {item?.questions.map((el, index) => {
         return (
-          <div
+          <Box
             sx={{
               display: "flex",
-              justifyContent: "center"
+              justifyContent: "space-between",
+              alignItems: "stretch",
+              p:2,
+              pl:5
             }}
           >
-            {el.data.text}
+            <Box
+              
+            >
+             <Typography fontFamily={"TT Rationalist"} fontSize={20}>{el.data.text}</Typography> 
+            </Box>
+
             {/* <Box>{score[index]}</Box> */}
             {/* {console.log("el", el)}
             {console.log("el me quest", el.question_type_id)} */}
@@ -104,7 +125,9 @@ export const Review = ({ item, valueScore, setValueScore }) => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center"
+                alignItems: "start",
+                justifyContent:"flex-start",
+                mr: 5
               }}
             >
               {el.question_type_id === 1 ? (
@@ -127,23 +150,33 @@ export const Review = ({ item, valueScore, setValueScore }) => {
                 />
               )}
             </Box>
-          </div>
+          </Box>
         );
       })}
-      <Button
-        //  onClick={() => {
-        //   refetch();
-        //   handleQuestionDecrement();
+      <Box sx={{
+        display:"flex",
+        justifyContent:"center",
+        p:2,
+        backgroundColor: "gainsboro"
 
-        // }}
-        color="primary"
-        variant="contained"
-        // startIcon={<ArrowBackIcon />}
-        // actions={actions}
-        // disabled={itemData === 0}
-      >
-        Submit
-      </Button>
+        
+      }}>
+        <Button
+          //  onClick={() => {
+          //   refetch();
+          //   handleQuestionDecrement();
+
+          // }}
+          color="success"
+          
+          variant="contained"
+          // startIcon={<ArrowBackIcon />}
+          // actions={actions}
+          // disabled={itemData === 0}
+        >
+          Submit
+        </Button>
+      </Box>
     </Paper>
   );
 };

@@ -17,7 +17,7 @@ export default function TypeStarReview({
       {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
       <Reating
         sx={{
-          fontSize: 50
+          fontSize: 40
         }}
         name="hover-feedback"
         value={score / 20}

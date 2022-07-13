@@ -23,6 +23,18 @@ ValueLabelComponent.propTypes = {
   value: PropTypes.number.isRequired
 };
 
+const marks = [
+  {
+    value: 0,
+    label: 'Bad',
+  },
+  {
+    value: 10,
+    label: 'Awesome',
+  }
+ 
+];
+
 const PrettoSlider = styled(Slider)({
   color: "#52af77",
   height: 8,
@@ -32,7 +44,7 @@ const PrettoSlider = styled(Slider)({
   "& .MuiSlider-thumb": {
     height: 24,
     width: 24,
-    backgroundColor: "#fff",
+    backgroundColor: "#0077b6",
     border: "2px solid currentColor",
     "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
       boxShadow: "inherit"
@@ -77,6 +89,7 @@ export default function CustomizedSlider({ valueScore, setValueScore }) {
         value={valueScore}
         // precision={10}
         max={10}
+        marks={marks}
         min={0}
         step={1}
       />

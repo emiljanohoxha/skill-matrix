@@ -83,8 +83,9 @@ export const Form = ({
       sx={{
         marginTop: 15,
         width: "75vw",
-        minHeight: "75%",
-        backgroundColor: "#a8dadc"
+        minHeight: "100%",
+        backgroundColor: "#f8edeb",
+        border:"1px solid #f9dcc4"
       }}
     >
       <Container>
@@ -110,6 +111,11 @@ export const Form = ({
             display: "flex",
             justifyContent: "space-between",
             mt: 1
+           
+              // position: "fixed",
+              // bottom: 0,
+              // width: "100%"
+          
           }}
         >
           <Box
@@ -131,7 +137,7 @@ export const Form = ({
             />
             {/* {console.log(typeof valueNotes)} */}
           </Box>
-          <Box>
+          <Box >
 
           <AlignItemsList 
           item={item}
@@ -186,6 +192,6 @@ export const Form = ({
           </Box>
         </Box>
       </Container>
-    </Paper>
+     </Paper>
   );
 };

@@ -33,6 +33,18 @@ export const FormComps = ({
         <Box
           sx={{
             display: "flex",
+            justifyContent: "flex-end"
+          }}
+        >
+          <Typography sx={{
+            border: "1px solid #457b9d",
+            padding: 1,
+            borderRadius: 3
+          }}>{`${answeredQuestions} / ${questionNumber} `}</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
             justifyContent: "center",
             p: 2,
             fontSize: 30,
@@ -56,29 +68,22 @@ export const FormComps = ({
           mr: 10
         }}
       >
-        <Box
-          sx={{
-            border: "1px solid #457b9d",
-            padding: 1
-          }}
-        >
-          <Typography>{`${answeredQuestions} / ${questionNumber} `}</Typography>
-        </Box>
+
       </Box>
 
-      <Box  sx={{
+      <Box sx={{
         display: "flex",
         justifyContent: "center",
         mb: 10
-      }}>        
-      { item?.questions[itemData].question_type_id === 1 ? <TypeStar valueScore={valueScore} getLabelText={getLabelText} setValueScore={setValueScore}
+      }}>
+        {item?.questions[itemData].question_type_id === 1 ? <TypeStar valueScore={valueScore} getLabelText={getLabelText} setValueScore={setValueScore}
           hover={hover}
           labels={labels}
-          /> : item?.questions[itemData].question_type_id === 2 ?
+        /> : item?.questions[itemData].question_type_id === 2 ?
           <CustomizedSlider valueScore={valueScore} setValueScore={setValueScore} />
-          : <ControlledRadioButtonsGroup valueScore={valueScore} setValueScore={setValueScore} />       
-     }
-     
+          : <ControlledRadioButtonsGroup valueScore={valueScore} setValueScore={setValueScore} />
+        }
+
       </Box>
 
     </>

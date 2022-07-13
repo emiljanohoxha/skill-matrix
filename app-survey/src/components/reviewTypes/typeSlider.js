@@ -18,6 +18,17 @@ function ValueLabelComponent(props) {
   );
 }
 
+const marks = [
+  {
+    value: 0,
+    label: 'Bad',
+  },
+  {
+    value: 10,
+    label: 'Awesome',
+  }
+ 
+];
 ValueLabelComponent.propTypes = {
   children: PropTypes.element.isRequired,
   value: PropTypes.number.isRequired
@@ -32,7 +43,7 @@ const PrettoSlider = styled(Slider)({
   "& .MuiSlider-thumb": {
     height: 24,
     width: 24,
-    backgroundColor: "#fff",
+    backgroundColor: "#0077b6",
     border: "2px solid currentColor",
     "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
       boxShadow: "inherit"
@@ -69,7 +80,7 @@ export default function TypeSliderReview({
   index
 }) {
   return (
-    <Box sx={{ width: 320 }}>
+    <Box sx={{ width: 250 }}>
       <PrettoSlider
         valueLabelDisplay="auto"
         aria-label="pretto slider"
@@ -81,6 +92,7 @@ export default function TypeSliderReview({
         max={10}
         min={0}
         step={1}
+        marks={marks}
       />
     </Box>
   );
