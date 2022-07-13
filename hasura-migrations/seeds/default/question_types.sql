@@ -5,4 +5,4 @@ INSERT INTO "public"."question_types" (
     )
 VALUES (1, 'star', 20),
     (2, 'slider', 10),
-    (3, 'dropdown', 20)
+    (3, 'true-false', 20)
