@@ -5,6 +5,7 @@ import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { Typography } from "@mui/material";
 import { TypeStar } from "../answerComps/typeStar";
 import CustomizedSlider from "../answerComps/typeSlider";
+import ControlledRadioButtonsGroup from "../answerComps/typeRadio";
 
 export const FormComps = ({
   item,
@@ -20,6 +21,8 @@ export const FormComps = ({
   questionNumber,
   answeredQuestions
 }) => {
+
+  console.log("item tek formCompos", item?.questions[itemData].question_type_id)
   return (
     <>
       <Box
@@ -63,15 +66,21 @@ export const FormComps = ({
         </Box>
       </Box>
 
-      {/* {
-        if ()
-      } */}
+      <Box  sx={{
+        display: "flex",
+        justifyContent: "center",
+        mb: 10
+      }}>        
+      { item?.questions[itemData].question_type_id === 1 ? <TypeStar valueScore={valueScore} getLabelText={getLabelText} setValueScore={setValueScore}
+          hover={hover}
+          labels={labels}
+          /> : item?.questions[itemData].question_type_id === 2 ?
+          <CustomizedSlider valueScore={valueScore} setValueScore={setValueScore} />
+          : <ControlledRadioButtonsGroup valueScore={valueScore} setValueScore={setValueScore} />       
+     }
+     
+      </Box>
 
-      <CustomizedSlider valueScore={valueScore} setValueScore={setValueScore} />
-      {/* <TypeStar valueScore={valueScore}  getLabelText={getLabelText} setValueScore={setValueScore}
-     hover={hover}
-     labels={labels} 
-      />  */}
     </>
   );
 };
