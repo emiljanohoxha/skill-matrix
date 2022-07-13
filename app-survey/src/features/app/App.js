@@ -187,6 +187,7 @@ export const App = () => {
             />
           }
         />
+        <Route path="/review" element={<Review item={test2.data} />} />
       </Routes>
     </>
   );
