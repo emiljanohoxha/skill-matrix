@@ -2,32 +2,29 @@ import Box from "@mui/material/Box";
 import Reating from "@mui/material/Rating";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 
-export const TypeStar = ({
+export default function TypeStarReview({
   item,
-
-  valueScore,
-  setValueScore,
+  score,
+  setScore,
+  index,
   hover,
   labels,
   getLabelText
-}) => {
+}) {
+  console.log("score star", score);
   return (
-    <Box
-      component="div"
-      display="inline"
-     
-    >
+    <Box component="div" display="inline">
       {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
       <Reating
         sx={{
           fontSize: 50
         }}
         name="hover-feedback"
-        value={valueScore}
+        value={score / 20}
         precision={0.5}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {
-          setValueScore(newValue);
+          setScore(newValue, index);
         }}
         emptyIcon={
           <StarOutlineIcon style={{ opacity: 0.55 }} fontSize="inherit" />
@@ -40,4 +37,4 @@ export const TypeStar = ({
       {/* {console.log(value)} */}
     </Box>
   );
-};
+}

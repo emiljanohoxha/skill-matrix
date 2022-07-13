@@ -7,6 +7,11 @@ import Reating from "@mui/material/Rating";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Button from "@mui/material/Button";
 
+import TypeSliderReview from "../reviewTypes/typeSlider";
+import TypeRadioReview from "../reviewTypes/typeRadio";
+import TypeStarReview from "../reviewTypes/typeStar";
+import { useEffect, useState } from "react";
+
 export const Review = ({ item, valueScore, setValueScore }) => {
   const GetAllAnswers = gql`
     query getAllAnswers($_eq: Int!) {
@@ -15,6 +20,44 @@ export const Review = ({ item, valueScore, setValueScore }) => {
       }
     }
   `;
+
+  const submitAnswer = gql`
+    mutation MyMutation($_eq: Int) {
+      update_answers(
+        where: { user_id: { _eq: $_eq } }
+        _set: { is_submited: true }
+      ) {
+        affected_rows
+      }
+    }
+  `;
+
+  const [score, setScore] = useState([]);
+
+  const changeScore = (value, index) => {
+    // let values = score;
+    //values[index] = value;
+    score[index] = value;
+    setScore(score);
+  };
+
+  const { isSuccess, data, loading } = useQuery(
+    "GetAnswerById",
+    GetAllAnswers,
+    {
+      variables: {
+        _eq: 1
+      }
+    }
+  );
+
+  useEffect(() => {
+    setScore(data?.answers);
+  }, [data]);
+
+  console.log("score", score);
+  console.log(score);
+
   const labels = {
     0: "Null",
     10: "Useless",
@@ -33,15 +76,6 @@ export const Review = ({ item, valueScore, setValueScore }) => {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
 
-  const { error, data, loading } = useQuery("GetAnswerById", GetAllAnswers, {
-    variables: {
-      _eq: 1
-    }
-  });
-
-  console.log(data);
-
-  console.log(item);
   return (
     <Paper
       sx={{
@@ -62,9 +96,9 @@ export const Review = ({ item, valueScore, setValueScore }) => {
             }}
           >
             {el.data.text}
-            <Box>{data?.answers[index].SCORE}</Box>
-            {console.log("el", el)}
-            {console.log("el me quest", el.question_type_id)}
+            {/* <Box>{score[index]}</Box> */}
+            {/* {console.log("el", el)}
+            {console.log("el me quest", el.question_type_id)} */}
 
             {/* {console.log("question type",el?.questions[0]?.question_type_id)} */}
             <Box
@@ -74,32 +108,23 @@ export const Review = ({ item, valueScore, setValueScore }) => {
               }}
             >
               {el.question_type_id === 1 ? (
-                //  <TypeStar valueScore={data?.answers[index].SCORE} setValueScore={setValueScore} item={item}
-                <Box component="div" display="inline">
-                  {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}
-                  <Reating
-                    sx={{
-                      fontSize: 40
-                    }}
-                    name="hover-feedback"
-                    value={valueScore}
-                    precision={0.5}
-                    getLabelText={getLabelText}
-                    onChange={(event, newValue) => {
-                      setValueScore(newValue);
-                    }}
-                    emptyIcon={
-                      <StarOutlineIcon
-                        style={{ opacity: 0.55 }}
-                        fontSize="inherit"
-                      />
-                    }
-                  />
-                </Box>
+                <TypeStarReview
+                  index={index}
+                  score={score[index]?.SCORE}
+                  setScore={changeScore}
+                />
               ) : el.question_type_id === 2 ? (
-                <CustomizedSlider />
+                <TypeSliderReview
+                  index={index}
+                  score={score[index]?.SCORE}
+                  setScore={changeScore}
+                />
               ) : (
-                <ControlledRadioButtonsGroup />
+                <TypeRadioReview
+                  index={index}
+                  score={score[index]?.SCORE}
+                  setScore={changeScore}
+                />
               )}
             </Box>
           </div>
