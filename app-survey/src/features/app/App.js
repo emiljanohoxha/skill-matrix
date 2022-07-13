@@ -181,6 +181,8 @@ export const App = () => {
               valueScore={valueScore}
               // item2={test1.data}
               singleData={data}
+              setItemData={setItemData}
+              setQuestionIndex={setQuestionIndex}
             />
           }
         />

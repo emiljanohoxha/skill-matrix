@@ -9,8 +9,8 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { FormComps } from "./formComps/formComps";
 import { useQuery, gql } from "../../../services/hasura-client";
 import { useEffect } from "react";
-import { Typography } from '@mui/material';
 import CustomIcons from "./formComps/paginationComp";
+import AlignItemsList from "./formComps/paginationComp";
 
 export const Form = ({
   increment,
@@ -28,6 +28,8 @@ export const Form = ({
   valueNotes,
   itemData,
   indexRecord,
+  setQuestionIndex,
+  setItemData,
   singleAnswer,
   setValueNotes,
   setValueScore,
@@ -83,25 +85,21 @@ console.log("itemdata",itemData)
       }}
     >
       <Container>
+    
         <FormComps
         questionNumber={questionNumber}
-          item={item}
+        answeredQuestions={answeredQuestions}
           labels={labels}
           getLabelText={getLabelText}
           itemData={itemData}
           indexRecord={indexRecord}
           valueNotes={valueNotes}
-         
+         item={item}
           valueScore={valueScore}
           setValueNotes={setValueNotes}
           // setHover={setHover}
           setValueScore={setValueScore}
         />
-        <Box>
-          <Typography>
-              {`${answeredQuestions} \\ ${questionNumber} `}
-          </Typography>
-        </Box>
         <Box
           component="div"
           sx={{
@@ -130,7 +128,14 @@ console.log("itemdata",itemData)
             {/* {console.log(typeof valueNotes)} */}
           </Box>
           <Box>
-          <CustomIcons/>
+          <AlignItemsList 
+          item={item}
+          questionNumber={questionNumber}
+          setItemData={setItemData}
+          setQuestionIndex={setQuestionIndex}
+          
+          
+          />
           </Box>
           <Box>
             <ButtonGroup
@@ -140,7 +145,8 @@ console.log("itemdata",itemData)
                 display: "flex",
                 justifyContent: "end",
                 mr: 5,
-                mt: 2
+                mt: 2,
+                mb:5
               }}
             >
               <Button

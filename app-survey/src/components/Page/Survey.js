@@ -14,6 +14,8 @@ export const Survey = ({
   singleAnswer,
   setValueScore,
   setValueNotes,
+  setItemData,
+  setQuestionIndex,
   valueScore,
   valueNotes,
   children,
@@ -66,8 +68,10 @@ export const Survey = ({
          valueScore={valueScore}
          valueNotes={valueNotes}
          setValueNotes={setValueNotes}
+         setItemData={setItemData}
          itemData={itemData}
          labels={labels}
+         setQuestionIndex={setQuestionIndex}
          handleQuestionIncrement={handleQuestionIncrement}
          handleQuestionDecrement={handleQuestionDecrement}
          getLabelText={getLabelText}

@@ -27,15 +27,17 @@ select_permissions:
     permission:
       columns:
         - NOTES
+        - SCORE
         - answer_id
         - board_id
-        - question_id
-        - SCORE
-        - user_id
-        - data
         - created_at
+        - data
+        - is_submited
+        - question_id
         - updated_at
+        - user_id
       filter: {}
+      allow_aggregations: true
 update_permissions:
   - role: form
     permission:
