@@ -67,7 +67,7 @@ export const Form = ({
 
   useEffect(() => {
     refetch();
-  }, [answeredQuestions, refetch]);
+  }, [answeredQuestions]);
 
   console.log(
     "numberOfUnansweredAnswers",
@@ -90,17 +90,13 @@ export const Form = ({
       <Container>
     
         <FormComps
-
         questionNumber={questionNumber}
         answeredQuestions={answeredQuestions}
-  
-
           labels={labels}
           getLabelText={getLabelText}
           itemData={itemData}
           indexRecord={indexRecord}
           valueNotes={valueNotes}
-
           item={item}
 
           valueScore={valueScore}
@@ -142,7 +138,7 @@ export const Form = ({
           questionNumber={questionNumber}
           setItemData={setItemData}
           setQuestionIndex={setQuestionIndex}
-          
+          itemData={itemData}
           
           />
           </Box>
@@ -159,7 +155,11 @@ export const Form = ({
               }}
             >
               <Button
-                onClick={handleQuestionDecrement}
+               onClick={() => {
+                refetch();
+                handleQuestionDecrement();
+              
+              }}
                 color="primary"
                 variant="contained"
                 startIcon={<ArrowBackIcon />}
@@ -173,6 +173,7 @@ export const Form = ({
                 onClick={() => {
                   refetch();
                   handleQuestionIncrement();
+                
                 }}
                 color="primary"
                 variant="contained"
