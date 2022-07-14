@@ -32,15 +32,8 @@ export const Review = ({ item, valueScore, setValueScore }) => {
     }
   `;
 
-  const [score, setScore] = useState([]);
-
-  const changeScore = (value, index) => {
-    // console.log(value);
-    const tempScore = [...score];
-    tempScore[index] = { SCORE: value };
-    setScore(tempScore);
-  };
-
+  const [score, setScore] = useState([]);  
+  console.log("score",score);
   const { isSuccess, data, loading } = useQuery(
     "GetAnswerById",
     GetAllAnswers,
@@ -49,11 +42,21 @@ export const Review = ({ item, valueScore, setValueScore }) => {
         _eq: 1
       }
     }
-  );
+    );
+    console.log("data",data);
+    
+    useEffect(() => {
+      setScore(data?.answers);
+    }, [data]);
+    
 
-  useEffect(() => {
-    setScore(data?.answers);
-  }, [data]);
+    const changeScore = (value, index) => {
+      // console.log(value);
+      const tempScore = [...score];
+      tempScore[index] = { SCORE: value };
+      setScore(tempScore);
+    };
+
 
   const labels = {
     0: "Null",

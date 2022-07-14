@@ -22,7 +22,8 @@ export const FormComps = ({
   answeredQuestions
 }) => {
 
-  console.log("item tek formCompos", item?.questions[itemData].question_type_id)
+  // console.log("item tek formCompos", item?.questions[itemData].question_type_id)
+  console.log("value score te for mcomps",valueScore)
   return (
     <>
       <Box

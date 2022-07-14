@@ -50,9 +50,9 @@ export const Survey = ({
 
   useEffect(() => {
     setValueScore(
-      typeof singleData?.answers_by_pk?.SCORE / 20 == "null"
+      typeof singleData?.answers_by_pk?.SCORE /20 == "null"
         ? 0
-        : singleData?.answers_by_pk?.SCORE / 20
+        : singleData?.answers_by_pk?.SCORE /20
     );
   }, [singleData]);
 

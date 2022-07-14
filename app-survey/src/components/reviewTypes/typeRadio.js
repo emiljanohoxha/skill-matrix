@@ -12,7 +12,7 @@ export default function TypeRadioReview({ score, setScore, index }) {
       <RadioGroup
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
-        value={score}
+        value={score }
         onChange={(event, newValue) => {
           setScore(newValue, index);
         }}
