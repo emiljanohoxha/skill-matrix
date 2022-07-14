@@ -25,7 +25,23 @@ For today work I would say it was great!
 5-Refactored some piece of code.
 
 ### Struggles
- 
+
 The first hassle was on fixing the bug which nearly took us 1-2hours.
 The second thing important was implementing the mutation to update and insert the given user answer.
 Other challenges faced were more unexpected for example we forget to change the permissions in hasura.
+
+### Day 6 Thursday
+
+For today work
+1-Added new table in database for different types of questions.
+2-Fixed pagination bug to direct the user to the right question.
+3-Implemented logic for different type of scores for each component form.
+4-Changed styling of components.
+5-Added route review and implemented route review component.
+
+## Struggles
+
+Our first struggle was on pagination which we fixed some bugs.
+Second was the review page which took many hours to do. The problem here
+was on user answer, the values given should be converted. After fixed this we moved on
+updating the answer with mutation.
