@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Reating from "@mui/material/Rating";
 import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import Button from "@mui/material/Button";
-import { Typography } from '@mui/material';
+import { Typography } from "@mui/material";
 import TypeSliderReview from "../reviewTypes/typeSlider";
 import TypeRadioReview from "../reviewTypes/typeRadio";
 import TypeStarReview from "../reviewTypes/typeStar";
@@ -35,10 +35,10 @@ export const Review = ({ item, valueScore, setValueScore }) => {
   const [score, setScore] = useState([]);
 
   const changeScore = (value, index) => {
-    // let values = score;
-    //values[index] = value;
-    score[index] = value;
-    setScore(score);
+    // console.log(value);
+    const tempScore = [...score];
+    tempScore[index] = { SCORE: value };
+    setScore(tempScore);
   };
 
   const { isSuccess, data, loading } = useQuery(
@@ -54,9 +54,6 @@ export const Review = ({ item, valueScore, setValueScore }) => {
   useEffect(() => {
     setScore(data?.answers);
   }, [data]);
-
-  console.log("score", score);
-  console.log(score);
 
   const labels = {
     0: "Null",
@@ -75,29 +72,54 @@ export const Review = ({ item, valueScore, setValueScore }) => {
   function getLabelText(value) {
     return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
-
+  const getScore = (obj, type) => {
+    if (obj && obj.SCORE) {
+      let sc=0;
+      switch(type) {
+        case 'star':
+          sc= obj.SCORE * 20;
+          break;
+        case 'slider':
+          sc= obj.SCORE * 10;
+          break;
+        case 'radio':
+          sc= obj.SCORE;
+          break;
+        default:
+          sc= 0;
+      }      
+      return sc;
+    }
+    return 0;
+  };
   return (
     <Paper
       sx={{
         // marginTop: 5,
         width: "50vw",
         minHeight: "50%",
-        backgroundColor: "#f8edeb",
+        backgroundColor: "#f8edeb"
         // pl: 5,
         // pt: 5
       }}
     >
-      <Box sx={{
-        display:"flex",
-        justifyContent:"center",
-        mb:2,
-        p:2,
-        backgroundColor: "gainsboro"
-      }}>
-        <Typography sx={{
-          fontFamily: "Didot Modern",
-          fontSize:28
-        }}>Review Survey</Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          // mb:2,
+          p: 2,
+          backgroundColor: "gainsboro"
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Didot Modern",
+            fontSize: 28
+          }}
+        >
+          Review Survey
+        </Typography>
       </Box>
 
       {item?.questions.map((el, index) => {
@@ -107,14 +129,16 @@ export const Review = ({ item, valueScore, setValueScore }) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "stretch",
-              p:2,
-              pl:5
+              p: 2,
+              pl: 5,
+
+              border: "1px solid #d8e2dc"
             }}
           >
-            <Box
-              
-            >
-             <Typography fontFamily={"TT Rationalist"} fontSize={20}>{el.data.text}</Typography> 
+            <Box>
+              <Typography fontFamily={"TT Rationalist"} fontSize={20}>
+                {el.data.text}
+              </Typography>
             </Box>
 
             {/* <Box>{score[index]}</Box> */}
@@ -126,26 +150,26 @@ export const Review = ({ item, valueScore, setValueScore }) => {
               sx={{
                 display: "flex",
                 alignItems: "start",
-                justifyContent:"flex-start",
+                justifyContent: "flex-start",
                 mr: 5
               }}
             >
               {el.question_type_id === 1 ? (
                 <TypeStarReview
                   index={index}
-                  score={score[index]?.SCORE}
+                  score={score && getScore(score[index], 'star')}
                   setScore={changeScore}
                 />
               ) : el.question_type_id === 2 ? (
                 <TypeSliderReview
                   index={index}
-                  score={score[index]?.SCORE}
+                  score={score && getScore(score[index], 'slider')}
                   setScore={changeScore}
                 />
               ) : (
                 <TypeRadioReview
                   index={index}
-                  score={score[index]?.SCORE}
+                  score={score && getScore(score[index], 'radio')}
                   setScore={changeScore}
                 />
               )}
@@ -153,14 +177,14 @@ export const Review = ({ item, valueScore, setValueScore }) => {
           </Box>
         );
       })}
-      <Box sx={{
-        display:"flex",
-        justifyContent:"center",
-        p:2,
-        backgroundColor: "gainsboro"
-
-        
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          p: 2,
+          backgroundColor: "gainsboro"
+        }}
+      >
         <Button
           //  onClick={() => {
           //   refetch();
@@ -168,7 +192,6 @@ export const Review = ({ item, valueScore, setValueScore }) => {
 
           // }}
           color="success"
-          
           variant="contained"
           // startIcon={<ArrowBackIcon />}
           // actions={actions}

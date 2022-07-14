@@ -11,7 +11,7 @@ export default function TypeStarReview({
   labels,
   getLabelText
 }) {
-  console.log("score star", score);
+  // console.log("score star", score);
   return (
     <Box component="div" display="inline">
       {/* {item2?.questions[indexRecord]?.board?.answers[indexRecord]?.SCORE} */}

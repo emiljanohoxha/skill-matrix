@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 function ValueLabelComponent(props) {
   const { children, value } = props;
 
-  console.log("value");
+  // console.log("value");
 
   return (
     <Tooltip enterTouchDelay={0} placement="top" title={value}>
@@ -75,7 +75,7 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function CustomizedSlider({ valueScore, setValueScore }) {
-  console.log("setii:", setValueScore);
+  // console.log("setii:", setValueScore);
 
   return (
     <Box sx={{ width: 320 }}>

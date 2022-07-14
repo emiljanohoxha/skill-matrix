@@ -2,10 +2,12 @@ import { useQuery, gql } from "../../services/hasura-client";
 import { useMutation } from "../../services/hasura-client/use-mutation";
 import Page from "../../components/Page";
 import { Logout } from "./Logout";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { Survey } from "../../components/Page/Survey";
 import { useState, useEffect } from "react";
 import { Review } from "../../components/Page/Review";
+import { Link } from 'react-router-dom'
+
 
 const GetAllQuestions = gql`
   query MyQuery {
@@ -72,7 +74,10 @@ const SaveAnswer = gql`
 
 
 export const App = () => {
+  const navigate = useNavigate();
   const test2 = useQuery("MyQuery", GetAllQuestions);
+
+  // const history = useHistory();
 
   const [question_index, setQuestionIndex] = useState(0);
   const [itemData, setItemData] = useState(0);
@@ -118,7 +123,9 @@ export const App = () => {
       setItemData(itemData + 1);
       setQuestionIndex((question_index) => question_index + 1);
     } else {
-      setQuestionIndex((question_index) => question_index);
+      // setQuestionIndex((question_index) => question_index);
+      navigate("/review");
+      window.location.reload();
     }
   };
 

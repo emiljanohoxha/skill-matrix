@@ -13,7 +13,10 @@ export default function TypeRadioReview({ score, setScore, index }) {
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
         value={score}
-        onChange={setScore(score, index)}
+        onChange={(event, newValue) => {
+          setScore(newValue, index);
+        }}
+        // onChange={setScore(score, index)}
         sx={{
           flexDirection: "row"
         }}
