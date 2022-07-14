@@ -1,13 +1,13 @@
 INSERT INTO "public"."questions" ("board_id", "question_type_id", "data")
-VALUES ('1', 1, '{"text":"how do you feel444?"}'),
-  ('2', 2, '{"text":"how do you feel555?"}'),
-  ('3', 3, '{"text":"how do you feel666?"}'),
-  ('1', 1, '{"text":"how do you feel777?"}'),
-  ('2', 2, '{"text":"how do you feel888?"}'),
-  ('3', 3, '{"text":"how do you feel999?"}'),
-  ('1', 1, '{"text":"how do you feel111?"}'),
-  ('2', 2, '{"text":"how do you feel122?"}'),
-  ('3', 3, '{"text":"how do you feel133?"}') -- handle conflicts:
+VALUES ('1', 1, '{"text":"How much do you like React Js?"}'),
+  ('2', 2, '{"text":"How much do you like Python?"}'),
+  ('3', 3, '{"text":"Have you ever heard of Hasura?"}'),
+  ('1', 1, '{"text":"How much do you like Haskell?"}'),
+  ('2', 2, '{"text":"How much do you like Elixir?"}'),
+  ('3', 3, '{"text":"Have you ever heard of Clojure?"}'),
+  ('1', 1, '{"text":"How much do you like Java?"}'),
+  ('2', 2, '{"text":"How much do you like Javascript?"}'),
+  ('3', 3, '{"text":"Have you ever heard of Scheme?"}') -- handle conflicts:
   ON CONFLICT ON CONSTRAINT "questions_pkey" DO
 UPDATE
 SET "board_id" = EXCLUDED."board_id"
