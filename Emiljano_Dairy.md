@@ -20,3 +20,10 @@ We started the day with a bug from the weekend consisting in getting some specif
 and with the help of our mentor Rezart we managed to fix it and keep going on the project in adding mutation to make insert and update,   
 we managed to put it into project really quick with some little issiues,  
 later on we added some other features like a progress and pagination component,and also tried to refactor dhe code ando make it more clean.
+
+## Day 6, Wednesday
+
+We started the day trying to improve the features that we had implemented on Tuesday, we fixed some small bugs in pagination and
+added two different types of questions, we had some troubles trying to implement them because we needed to convert the values,
+we managed to implement them quickly and started to work on implementing the review page, we started on it, created some queries
+te get the answers given by user and displayed it into user interface. Later on we tried to update the answers,which we are having some troubles because dhe converted data is not as it should be.
