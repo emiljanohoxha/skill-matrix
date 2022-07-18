@@ -37,7 +37,7 @@ export default function AlignItemsList({ item, questionNumber, setItemData, setQ
           }}
           onChange={(e, n) => handleChangePage(e, n -1)}
           />
-          {console.log("item te pagi",itemData)}
+          {/* {console.log("item te pagi",itemData)} */}
       </Box>
     </Container>
 

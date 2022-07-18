@@ -22,7 +22,8 @@ export const TypeStar = ({
         sx={{
           fontSize: 50
         }}
-        name="hover-feedback"
+        name="customized-10"
+        max={10}
         value={valueScore}
         precision={0.5}
         getLabelText={getLabelText}

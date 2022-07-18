@@ -33,7 +33,7 @@ export const Review = ({ item, valueScore, setValueScore }) => {
   `;
 
   const [score, setScore] = useState([]);  
-  console.log("score",score);
+  // console.log("score",score);
   const { isSuccess, data, loading } = useQuery(
     "GetAnswerById",
     GetAllAnswers,
@@ -43,33 +43,41 @@ export const Review = ({ item, valueScore, setValueScore }) => {
       }
     }
     );
-    console.log("data",data);
+    // console.log("data",data);
     
     useEffect(() => {
       setScore(data?.answers);
     }, [data]);
     
 
+    console.log("data",data?.answers)
+
+    console.log("Score",score)
+
     const changeScore = (value, index) => {
       // console.log(value);
       const tempScore = [...score];
+      // console.log("tempscpre",tempScore)
       tempScore[index] = { SCORE: value };
+      // console.log("tempscpre",tempScore[index])
+
       setScore(tempScore);
+
     };
 
 
   const labels = {
     0: "Null",
-    10: "Useless",
-    20: "Useless+",
-    30: "Poor",
-    40: "Poor+",
-    50: "Ok",
-    60: "Ok+",
-    70: "Good",
-    80: "Good+",
-    90: "Excellent",
-    100: "Excellent+"
+    1: "Useless",
+    2: "Useless+",
+    3: "Poor",
+    4: "Poor+",
+    5: "Ok",
+    6: "Ok+",
+    7: "Good",
+    8: "Good+",
+    9: "Excellent",
+    10: "Excellent+"
   };
 
   function getLabelText(value) {
@@ -80,10 +88,10 @@ export const Review = ({ item, valueScore, setValueScore }) => {
       let sc=0;
       switch(type) {
         case 'star':
-          sc= obj.SCORE * 20;
+          sc= obj.SCORE ;
           break;
         case 'slider':
-          sc= obj.SCORE * 10;
+          sc= obj.SCORE ;
           break;
         case 'radio':
           sc= obj.SCORE;
@@ -91,6 +99,7 @@ export const Review = ({ item, valueScore, setValueScore }) => {
         default:
           sc= 0;
       }      
+      // console.log("Sc",sc)
       return sc;
     }
     return 0;

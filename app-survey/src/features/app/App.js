@@ -86,32 +86,38 @@ export const App = () => {
   const [valueNotes, setValueNotes] = useState("");
   const [valueScore, setValueScore] = useState(0);
 
-  const { error, data, loading, refetch } = useQuery(
+  let questionIdVar = test2?.data?.questions[question_index]?.question_id;
+
+  const { error, data, isLoading,isSuccess, refetch } = useQuery(
     "GetAnswerById",
     GetAnswerByAnswerId,
     {
       enabled: false,
       variables: {
         user_id: 1,
-        question_id: test2?.data?.questions[question_index]?.question_id
+        question_id: questionIdVar
       }
     }
   );
 
   useEffect(() => {
     refetch();
-  }, [question_index, refetch]);
+  }, [isLoading,question_index,refetch]);
 
   const questionNumber = test2?.data?.questions?.length;
   const [progress, setProgress] = useState("");
 
   //answers input state
+  let typeOfQuestion = test2?.data?.questions[question_index].question_type_id
+
 
   const answerMutation = useMutation(SaveAnswer, {
     variables: {
       user_id: 1,
       question_id: test2?.data?.questions[question_index]?.question_id,
-      SCORE: valueScore * 20,
+      // SCORE: valueScore * 20,
+      SCORE: valueScore ,
+      // SCORE: typeOfQuestion  === 1 ?  valueScore * 20 : typeOfQuestion  === 2 ? valueScore * 10 : valueScore,
       NOTES: valueNotes,
       _eq1_question_id: test2?.data?.questions[question_index]?.question_id,
       _eq_user_id: 1
@@ -157,7 +163,7 @@ export const App = () => {
         />
         <Route
           path="/survey"
-          element={
+          element={ isSuccess ?
             <Survey
               questionNumber={questionNumber}
               handleQuestionIncrement={handleQuestionIncrement}
@@ -172,7 +178,11 @@ export const App = () => {
               singleData={data}
               setItemData={setItemData}
               setQuestionIndex={setQuestionIndex}
+            
+            
             />
+
+          :  "loading time..."
           }
         />
         <Route

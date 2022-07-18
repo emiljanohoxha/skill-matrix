@@ -69,13 +69,13 @@ export const Form = ({
     refetch();
   }, [answeredQuestions]);
 
-  console.log(
-    "numberOfUnansweredAnswers",
-    data?.answers_aggregate?.aggregate?.count
-  );
+  // console.log(
+  //   "numberOfUnansweredAnswers",
+  //   data?.answers_aggregate?.aggregate?.count
+  // );
 
-  console.log("item", item);
-  console.log("itemdata", itemData);
+  // console.log("item", item);
+  // console.log("itemdata", itemData);
 
   return (
     <Paper

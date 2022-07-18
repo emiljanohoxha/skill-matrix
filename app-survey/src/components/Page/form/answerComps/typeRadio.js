@@ -24,7 +24,7 @@ export default function ControlledRadioButtonsGroup({
         >
           {console.log("valueScore",valueScore)}
         <FormControlLabel value={0} control={<Radio />} label="No" />
-        <FormControlLabel value={100} control={<Radio />} label="Yes" />
+        <FormControlLabel value={10} control={<Radio />} label="Yes" />
       </RadioGroup>
     </FormControl>
   );

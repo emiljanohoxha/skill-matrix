@@ -23,16 +23,16 @@ export const Survey = ({
 }) => {
   const labels = {
     0: "Null",
-    10: "Useless",
-    20: "Useless+",
-    30: "Poor",
-    40: "Poor+",
-    50: "Ok",
-    60: "Ok+",
-    70: "Good",
-    80: "Good+",
-    90: "Excellent",
-    100: "Excellent+"
+    1: "Useless",
+    2: "Useless+",
+    3: "Poor",
+    4: "Poor+",
+    5: "Ok",
+    6: "Ok+",
+    7: "Good",
+    8: "Good+",
+    9: "Excellent",
+    10: "Excellent+"
   };
   const [hover, setHover] = useState(-1);
 
@@ -50,9 +50,9 @@ export const Survey = ({
 
   useEffect(() => {
     setValueScore(
-      typeof singleData?.answers_by_pk?.SCORE /20 == "null"
+      typeof singleData?.answers_by_pk?.SCORE  == "null"
         ? 0
-        : singleData?.answers_by_pk?.SCORE /20
+        : singleData?.answers_by_pk?.SCORE 
     );
   }, [singleData]);
 

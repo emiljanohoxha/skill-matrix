@@ -23,7 +23,7 @@ export const FormComps = ({
 }) => {
 
   // console.log("item tek formCompos", item?.questions[itemData].question_type_id)
-  console.log("value score te for mcomps",valueScore)
+  // console.log("value score te for mcomps",valueScore)
   return (
     <>
       <Box
@@ -56,7 +56,7 @@ export const FormComps = ({
             letterSpacing: "3px"
           }}
         >
-          {console.log("item", item)}
+          {/* {console.log("item", item)} */}
           {/* {console.log("item2", item2)} */}
 
           {item?.questions[itemData]?.data?.text}

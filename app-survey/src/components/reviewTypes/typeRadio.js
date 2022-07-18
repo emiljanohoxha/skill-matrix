@@ -21,7 +21,7 @@ export default function TypeRadioReview({ score, setScore, index }) {
           flexDirection: "row"
         }}
       >
-        <FormControlLabel value={100} control={<Radio />} label="Yes" />
+        <FormControlLabel value={10} control={<Radio />} label="Yes" />
         <FormControlLabel value={0} control={<Radio />} label="No" />
       </RadioGroup>
     </FormControl>

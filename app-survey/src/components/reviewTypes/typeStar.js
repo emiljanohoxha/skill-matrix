@@ -19,8 +19,9 @@ export default function TypeStarReview({
         sx={{
           fontSize: 40
         }}
-        name="hover-feedback"
-        value={score / 20}
+        name="customized-10"
+        max={10}
+        value={score }
         precision={0.5}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {

@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 function ValueLabelComponent(props) {
   const { children, value } = props;
 
-  console.log("value");
+  // console.log("value");
 
   return (
     <Tooltip enterTouchDelay={0} placement="top" title={value}>
@@ -87,7 +87,7 @@ export default function TypeSliderReview({
         onChange={(event, newValue) => {
           setScore(newValue, index);
         }}
-        value={score / 10}
+        value={score }
         precision={10}
         max={10}
         min={0}
