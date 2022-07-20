@@ -25,7 +25,7 @@ export const TypeStar = ({
         name="customized-10"
         max={10}
         value={valueScore}
-        precision={0.5}
+        precision={1}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {
           setValueScore(newValue);

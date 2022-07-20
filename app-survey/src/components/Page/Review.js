@@ -14,11 +14,12 @@ import { useEffect, useState } from "react";
 
 export const Review = ({ item, valueScore, setValueScore }) => {
   const GetAllAnswers = gql`
-    query getAllAnswers($_eq: Int!) {
-      answers(where: { user_id: { _eq: $_eq } }) {
-        SCORE
-      }
+  query getAllAnswers($_eq: Int!) {
+    answers(where: {user_id: {_eq: $_eq}}, order_by: {question_id: asc}) {
+      SCORE
     }
+  }
+  
   `;
 
   const submitAnswer = gql`

@@ -76,9 +76,6 @@ const SaveAnswer = gql`
 export const App = () => {
   const navigate = useNavigate();
   const test2 = useQuery("MyQuery", GetAllQuestions);
-
-  // const history = useHistory();
-
   const [question_index, setQuestionIndex] = useState(0);
   const [itemData, setItemData] = useState(0);
 
@@ -129,7 +126,6 @@ export const App = () => {
       setItemData(itemData + 1);
       setQuestionIndex((question_index) => question_index + 1);
     } else {
-      // setQuestionIndex((question_index) => question_index);
       navigate("/review");
       window.location.reload();
     }
@@ -145,8 +141,6 @@ export const App = () => {
       setQuestionIndex(question_index);
     }
   };
-
-  // const test1 = useQuery("MyQuery1", GetAllQuestionsPlusAnswers);
 
   return (
     <>
@@ -174,14 +168,10 @@ export const App = () => {
               setValueScore={setValueScore}
               valueNotes={valueNotes}
               valueScore={valueScore}
-              // item2={test1.data}
               singleData={data}
               setItemData={setItemData}
-              setQuestionIndex={setQuestionIndex}
-            
-            
+              setQuestionIndex={setQuestionIndex}           
             />
-
           :  "loading time..."
           }
         />

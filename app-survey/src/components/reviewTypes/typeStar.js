@@ -22,7 +22,7 @@ export default function TypeStarReview({
         name="customized-10"
         max={10}
         value={score }
-        precision={0.5}
+        precision={1}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {
           setScore(newValue, index);

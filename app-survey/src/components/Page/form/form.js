@@ -62,6 +62,9 @@ export const Form = ({
   // console.log("questionNumber",questionNumber);/
   const UnansweredQuestions = data?.answers_aggregate?.aggregate?.count;
 
+
+  console.log("data?.answers_aggregate?.aggregate?.count",data?.answers_aggregate?.aggregate?.count)
+
   const answeredQuestions = questionNumber - UnansweredQuestions;
   // console.log(answeredQuestions)
 
